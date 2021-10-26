@@ -5,7 +5,7 @@
 
         <ul>
             <li><a href="#">Sign In</a></li>
-            <li><a href="#">Register</a></li>
+            <li><a href="/registration/newuser">Register</a></li>
         </ul>
 
 

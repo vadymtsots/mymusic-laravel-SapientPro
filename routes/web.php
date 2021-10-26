@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/main', [ReviewController::class, 'getAllReviews']);
+
+Route::get('/registration/newuser', [UserController::class, 'showForm']);
+
+Route::post('/registration', [UserController::class, 'storeData']);
