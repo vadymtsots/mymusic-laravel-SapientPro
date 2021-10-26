@@ -15,13 +15,13 @@
         <input type="text" name="name" id="name" placeholder="Username"> <br />
 
         <label for="email">Email</label>
-        <input type="email" name="email", id="email" placeholder="Email"> <br />
+        <input type="text" name="email" id="email" placeholder="Email"> <br />
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password" placeholder="Password"> <br />
 
-        <label for="password_confirm">Confirm password</label>
-        <input type="password" name="password_confirm" id="password_confirm"> <br />
+        <label for="password_confirmation">Confirm password</label>
+        <input type="password" name="password_confirmation" id="password_confirmation"> <br />
 
         <input type="submit" name="submit" id="submit">
     </form>

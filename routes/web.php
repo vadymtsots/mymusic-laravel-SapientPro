@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/success', function () {
+    return view('success');
+});
+
 Route::get('/main', [ReviewController::class, 'getAllReviews']);
 
 Route::get('/registration/newuser', [UserController::class, 'showForm']);

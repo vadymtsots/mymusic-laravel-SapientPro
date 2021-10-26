@@ -12,14 +12,21 @@ class UserController extends Controller
         return view('registration');
     }
 
-    public function storeData()
+    public function storeData(Request $request)
     {
-       $user = new User;
 
-        $user->name = request('name');
-        $user->email = request('email');
-        $user->password = request('password');
-        $user->save();
+       $validatedData = $request->validate([
+           'name' => 'required|unique:users,name',
+           'email' => 'required|email:rfc,dns|unique:users,email',
+           'password' => 'required_with:password_confirmation|min:6',
+           'password_confirmation' => 'required|same:password'
+       ]);
+
+       User::create($request->all());
+
+
+
+        return redirect('/success');
 
 
     }
