@@ -22,7 +22,7 @@ class UserController extends Controller
            'password_confirmation' => 'required|same:password'
        ]);
 
-       User::create($request->all());
+       User::create($request->all()); //pass above values to the database
 
         return redirect('/success');
 
