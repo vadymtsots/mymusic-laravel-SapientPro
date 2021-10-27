@@ -12,7 +12,7 @@
     <form action="{{ route('auth') }}" method="post" class="registration_form">
         @csrf
         <label for="name">Email</label>
-        <input type="text" name="email" id="email" placeholder="email"> <br />
+        <input type="text" name="email" id="email" placeholder="Email"> <br />
         @error('email')
         <div class="error"> {{ $message }} </div>
         @enderror
@@ -26,6 +26,10 @@
 
         <input type="submit" name="submit" id="submit" class="button">
     </form>
+
+    <div>
+    <p>Don't have an account? <a href="{{ route('registration') }}">Register</a></p>
+    </div>
 
 </section>
 

@@ -7,6 +7,8 @@ use App\Models\Artist;
 use App\Models\User;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ReviewController extends Controller
 {
@@ -14,7 +16,8 @@ class ReviewController extends Controller
     {
         return view('main',
         [
-            'reviews' => Review::with("user", "artist", "album")->get()
+            'reviews' => Review::with("user", "artist", "album")->get(),
+
         ]);
     }
 }

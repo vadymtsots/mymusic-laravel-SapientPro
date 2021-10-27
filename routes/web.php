@@ -38,3 +38,6 @@ Route::get('/login/form', [LoginController::class, 'loginForm']
 
 Route::post('/auth', [LoginController::class, 'authenticate']
 )->name('auth');
+
+Route::post('/logout', [LoginController::class, 'logout']
+)->name('logout');

@@ -8,7 +8,7 @@
 <section>
 
     <p>
-        You've been successfuly registered! Now you can <a href="#">sign in</a>
+        You've been successfuly registered! Now you can <a href="{{ route('loginForm') }}">sign in</a>
     </p>
 
 </section>
