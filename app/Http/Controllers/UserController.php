@@ -24,7 +24,7 @@ class UserController extends Controller
 
        User::create($request->all()); //pass above values to the database
 
-        return redirect('/success');
+        return redirect()->route('registration.success');
 
 
     }

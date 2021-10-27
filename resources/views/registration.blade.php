@@ -9,7 +9,7 @@
 
 
 
-    <form action="/registration" method="post">
+    <form action="{{ route('submit') }}" method="post" class="registration_form">
         @csrf
         <label for="name">Username</label>
         <input type="text" name="name" id="name" placeholder="Username"> <br />
@@ -36,7 +36,7 @@
         <div class="error"> {{ $message }} </div>
         @enderror
 
-        <input type="submit" name="submit" id="submit">
+        <input type="submit" name="submit" id="submit" class="button">
     </form>
 
 </section>

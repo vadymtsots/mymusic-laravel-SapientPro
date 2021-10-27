@@ -6,28 +6,29 @@
 @include('includes.header')
 </header>
 
-<section>
+<section class="card">
 
-    <div class="card">
+
 
         @foreach ($reviews as $review)
 
 
+        <div class="review">
+            <p class="text">Artist: {{ $review->artist->name }}</p> <br />
+            <p class="text">Album: {{ $review->album->name }}</p> <br />
+            <p class="text">Review: {{ $review->review_body }}</p> <br />
+            <p class="text">Rating: {{ $review->rating }}</p> <br />
+            <p class="text">User: {{ $review->user->name }}</p> <br />
 
-            <p>Review: {{ $review->review_body }}</p> <br />
-            <p>Rating: {{ $review->rating }}</p> <br />
-            <p>User: {{ $review->user->name }}</p> <br />
-            <p>Artist: {{ $review->artist->name }}</p> <br />
-            <p>Album: {{ $review->album->name }}</p> <br />
-
+        </div>
 
 
         @endforeach
 
-    </div>
 
 
-    <a href="#">Create new review</a>
+
+
 </section>
 
 <footer>

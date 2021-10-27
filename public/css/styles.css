@@ -1,3 +1,7 @@
+body{
+    font-family: Ubuntu, "Times New Roman", sans-serif;
+}
+
 header{
     text-align: center;
     border-bottom: 2px solid cornflowerblue;
@@ -9,7 +13,7 @@ header{
 .title{
     text-decoration: none;
     color: darkblue;
-    font-family: Verdana, Times New Roman, sans-serif;
+    font-family: Ubuntu, "Times New Roman", sans-serif;
 }
 
 ul{
@@ -19,7 +23,7 @@ ul{
 li{
     list-style-type: none;
     display: inline;
-    font-family: Verdana, "Times New Roman", sans-serif;
+    font-family: Ubuntu, "Times New Roman", sans-serif;
     font-size: large;
     color: midnightblue;
     border: 2px solid azure;
@@ -29,7 +33,7 @@ li{
 }
 
 footer p{
-    position: fixed;
+    position: relative;
     width: 100%;
     left: 0;
     bottom: 0;
@@ -41,13 +45,53 @@ li a{
     text-decoration: none;
 }
 
-.card{
-    border: 8px solid cornflowerblue;
-    height: auto;
+label{
+    font-family: Ubuntu, "Times New Roman", sans-serif;
+    font-size: medium;
+    padding: 5px;
+    font-weight: bold;
+    color: darkblue;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 5px;
 }
+
+input{
+    font-family: Ubuntu, "Times New Roman", sans-serif;
+    width: 35%;
+    margin: 5px;
+
+}
+
+.review{
+    border-block: 2px solid darkblue;
+    padding: 5px;
+    width: 30%;
+    margin: auto;
+
+}
+
+.text{
+    text-align: center;
+    font-family: Ubuntu, "Times New Roman", sans-serif;
+
+}
+
+.registration_form{
+    padding: 20px;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    font-family: Ubuntu, "Times New Roman", sans-serif;
+}
+
+.button{
+    color: darkblue;
+    border-radius: 5px;
+    width: 25%;
+    height: 30px;
+}
+
+
 
 .navbar{
     text-align: right;
@@ -55,6 +99,7 @@ li a{
 
 .error{
     color: red;
+    font-family: Ubuntu, "Times New Roman", sans-serif;
 }
 
 
