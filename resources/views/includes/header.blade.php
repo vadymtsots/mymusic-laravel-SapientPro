@@ -13,7 +13,7 @@
 
     <ul>
         <li><a href="{{ route('addReview') }}" class="add"><p>Add new review</p></a></li>
-        <li><a href="#" class="add"><p>My reviews</p></a></li>
+        <li><a href="{{ route('userReviews', ['id' => Auth::user()->id]) }}" class="add"><p>My reviews</p></a></li>
 
     </ul>
 

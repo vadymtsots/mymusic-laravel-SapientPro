@@ -51,4 +51,13 @@ class ReviewController extends Controller
         return redirect()->route('addReview');
 
     }
+
+    public function getUserReviews(User $user)
+    {
+        $user = Auth::user();
+        return view('main',
+            [
+                'reviews' => $user->reviews
+            ]);
+    }
 }
