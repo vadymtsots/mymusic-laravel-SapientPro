@@ -30,8 +30,11 @@ Route::get('/main', [ReviewController::class, 'getAllReviews']
 Route::get('/registration/newuser', [UserController::class, 'showForm']
 )->name('registration');
 
-Route::post('/registration', [UserController::class, 'storeData']
-)->name('submit');
+Route::get('new', [ReviewController::class, 'addReviewForm']
+)->name('addReview');
+
+Route::post('new/review', [ReviewController::class, 'storeData']
+)->name('reviewSubmit');
 
 Route::get('/login/form', [LoginController::class, 'loginForm']
 )->name('loginForm');
@@ -41,3 +44,6 @@ Route::post('/auth', [LoginController::class, 'authenticate']
 
 Route::post('/logout', [LoginController::class, 'logout']
 )->name('logout');
+
+Route::post('/registration', [UserController::class, 'storeData']
+)->name('registrationSubmit');

@@ -1,4 +1,4 @@
-<h1 ><a class="title" href="{{ route('main') }}">MyMusic</a></h1>
+<a class="title" href="{{ route('main') }}"><h1>MyMusic</h1></a>
 
 <nav class="navbar">
     @if(Auth::check())
@@ -10,6 +10,12 @@
             @csrf
             <input type="submit" value="Logout" class="logout">
             </form>
+
+    <ul>
+        <li><a href="{{ route('addReview') }}" class="add"><p>Add new review</p></a></li>
+        <li><a href="#" class="add"><p>My reviews</p></a></li>
+
+    </ul>
 
     @else
     <ul>

@@ -9,7 +9,7 @@
 
 
 
-    <form action="{{ route('submit') }}" method="post" class="registration_form">
+    <form action="{{ route('registrationSubmit') }}" method="post" class="registration_form">
         @csrf
         <label for="name">Username</label>
         <input type="text" name="name" id="name" placeholder="Username"> <br />

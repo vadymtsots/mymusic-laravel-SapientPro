@@ -26,6 +26,5 @@ class UserController extends Controller
 
         return redirect()->route('registration.success');
 
-
     }
 }

@@ -9,6 +9,8 @@ class Review extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id', 'artist_id', 'album_id', 'review_body', 'rating'];
+
     public function album()
     {
         return $this->belongsTo(Album::class, 'album_id');

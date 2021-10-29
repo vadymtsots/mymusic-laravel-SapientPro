@@ -1,7 +1,8 @@
 body{
     font-family: Ubuntu, "Times New Roman", sans-serif;
-    margin: auto;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 header{
@@ -126,6 +127,18 @@ input{
     text-decoration: none;
     color: darkblue;
     font-family: Ubuntu, "Times New Roman", sans-serif;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px 15px;
+}
+
+.add{
+    text-align: left;
 }
 
 

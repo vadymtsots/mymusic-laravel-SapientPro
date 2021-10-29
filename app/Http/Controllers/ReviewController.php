@@ -20,4 +20,35 @@ class ReviewController extends Controller
 
         ]);
     }
+
+    public function addReviewForm()
+    {
+        return view('new');
+    }
+
+    public function storeData(Request $request)
+    {
+       /* $review = new Review;
+
+        $review->user_id = $request->input('user_id');
+        $review->artist_id = $request->input('artist_id');
+        $review->album_id = $request->input('album_id');
+        $review->review_body = $request->input('review_body');
+        $review->rating = $request->input('rating');
+        $review->save(); */
+
+       $validatedData = $request->validate(
+       [
+           'user_id' => 'required|exists:App\Models\User,id',
+           'artist_id' => 'required|exists:App\Models\Artist,id',
+           'album_id' => 'required|exists:App\Models\Album,id',
+           'review_body' => 'required|max:1000',
+           'rating' => 'required|numeric|between:1,10'
+       ]);
+
+       Review::create($request->all());
+
+        return redirect()->route('addReview');
+
+    }
 }
