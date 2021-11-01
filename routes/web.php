@@ -50,3 +50,6 @@ Route::post('/registration', [UserController::class, 'storeData']
 
 Route::get('/users/user:id', [ReviewController::class, 'getUserReviews']
 )->name('userReviews');
+
+Route::get('/reviews/{review}', [ReviewController::class, 'getSingleReview']
+)->name('singleReview');

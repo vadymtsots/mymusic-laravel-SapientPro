@@ -4,15 +4,10 @@
 
 <header>
 
-@include('includes.header')
+    @include('includes.header')
 </header>
 
 <section class="card">
-
-
-
-        @foreach ($reviews as $review)
-
 
         <div class="review">
             <p class="text">Artist: {{ $review->artist->name }}</p> <br />
@@ -21,17 +16,11 @@
             <p class="text">Rating: {{ $review->rating }}</p> <br />
             <p class="text">User: {{ $review->user->name }}</p> <br />
 
-            <a href="{{ route('singleReview', $review) }}">Go to review</a>
-
+            <ul>
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">Delete</a></li>
+            </ul>
         </div>
-
-
-        @endforeach
-
-
-
-
-
 </section>
 
 <footer>

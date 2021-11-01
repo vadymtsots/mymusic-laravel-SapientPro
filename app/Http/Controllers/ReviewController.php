@@ -60,4 +60,13 @@ class ReviewController extends Controller
                 'reviews' => $user->reviews
             ]);
     }
+
+    public function getSingleReview(Review $review)
+    {
+        return view('review',
+            [
+                'review' => $review
+
+            ]);
+    }
 }
