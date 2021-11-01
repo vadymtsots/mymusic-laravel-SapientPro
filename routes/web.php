@@ -53,3 +53,9 @@ Route::get('/users/user:id', [ReviewController::class, 'getUserReviews']
 
 Route::get('/reviews/{review}', [ReviewController::class, 'getSingleReview']
 )->name('singleReview');
+
+Route::get('review/edit/{review}', [ReviewController::class, 'editForm']
+)->name('editForm');
+
+Route::post('/edit/{review:id}', [ReviewController::class, 'updateReview']
+)->name('editSubmit');

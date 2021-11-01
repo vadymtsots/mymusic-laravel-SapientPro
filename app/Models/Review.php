@@ -11,6 +11,8 @@ class Review extends Model
 
     protected $fillable = ['user_id', 'artist_id', 'album_id', 'review_body', 'rating'];
 
+    protected $guarded = ['_token'];
+
     public function album()
     {
         return $this->belongsTo(Album::class, 'album_id');

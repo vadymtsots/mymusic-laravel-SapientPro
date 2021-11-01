@@ -52,6 +52,24 @@ class ReviewController extends Controller
 
     }
 
+    public function updateReview(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:App\Models\User,id',
+           'artist_id' => 'required|exists:App\Models\Artist,id',
+           'album_id' => 'required|exists:App\Models\Album,id',
+           'review_body' => 'required|max:1000',
+           'rating' => 'required|numeric|between:1,10'
+        ]);
+
+
+        Review::where('id', $id)
+            ->update($request->except('_token'));
+
+        return redirect()->route('singleReview', $id);
+    }
+
+
     public function getUserReviews(User $user)
     {
         $user = Auth::user();
@@ -68,5 +86,13 @@ class ReviewController extends Controller
                 'review' => $review
 
             ]);
+    }
+
+    public function editForm(Review $review)
+    {
+        return view('edit',
+        [
+            'review' => $review
+        ]);
     }
 }
