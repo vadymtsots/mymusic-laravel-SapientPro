@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 
 class UserController extends Controller
@@ -12,17 +13,12 @@ class UserController extends Controller
         return view('registration');
     }
 
-    public function storeData(Request $request)
+    public function storeData(UserRequest $request)
     {
 
-       $validatedData = $request->validate([
-           'name' => 'required|unique:users,name',
-           'email' => 'required|email:rfc,dns|unique:users,email',
-           'password' => 'required_with:password_confirmation|min:6',
-           'password_confirmation' => 'required|same:password'
-       ]);
-
-       User::create($request->all()); //pass above values to the database
+      $user = new User;
+      $user->fill($request->validated());
+      $user->save();
 
         return redirect()->route('registration.success');
 

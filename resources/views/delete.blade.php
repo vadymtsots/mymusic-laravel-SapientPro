@@ -12,7 +12,7 @@
     <form action="{{ route('deleteReview', $review->id) }}" method="post">
         @csrf
         @method('delete')
-    <button class="button">OK</button>
+    <button>OK</button>
     </form>
     <a href="{{ route('singleReview', $review) }}" class="button">Cancel</a>
 

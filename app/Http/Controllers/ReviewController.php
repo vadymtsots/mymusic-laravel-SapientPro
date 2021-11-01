@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -26,7 +26,7 @@ class ReviewController extends Controller
         return view('new');
     }
 
-    public function storeData(Request $request)
+    public function storeData(ReviewRequest $request)
     {
        /* $review = new Review;
 
@@ -37,7 +37,7 @@ class ReviewController extends Controller
         $review->rating = $request->input('rating');
         $review->save(); */
 
-       $validatedData = $request->validate(
+       /* $validatedData = $request->validate(
        [
            'user_id' => 'required|exists:App\Models\User,id',
            'artist_id' => 'required|exists:App\Models\Artist,id',
@@ -46,25 +46,21 @@ class ReviewController extends Controller
            'rating' => 'required|numeric|between:1,10'
        ]);
 
-       Review::create($request->all());
+       Review::create($request->all()); */
+
+
+       $review = new Review;
+       $review->fill($request->validated());
+       $review->save();
 
         return redirect()->route('addReview');
 
     }
 
-    public function updateReview(Request $request, $id)
+    public function updateReview(ReviewRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'user_id' => 'required|exists:App\Models\User,id',
-           'artist_id' => 'required|exists:App\Models\Artist,id',
-           'album_id' => 'required|exists:App\Models\Album,id',
-           'review_body' => 'required|max:1000',
-           'rating' => 'required|numeric|between:1,10'
-        ]);
-
-
         Review::where('id', $id)
-            ->update($request->except('_token'));
+            ->update($request->validated());
 
         return redirect()->route('singleReview', $id);
     }
