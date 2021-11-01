@@ -69,6 +69,14 @@ class ReviewController extends Controller
         return redirect()->route('singleReview', $id);
     }
 
+    public function deleteReview(Request $request, $id)
+    {
+        Review::where('id', $id)
+            ->delete();
+
+        return redirect()->route('main');
+    }
+
 
     public function getUserReviews(User $user)
     {
@@ -91,6 +99,14 @@ class ReviewController extends Controller
     public function editForm(Review $review)
     {
         return view('edit',
+        [
+            'review' => $review
+        ]);
+    }
+
+    public function deleteConfirmation(Review $review)
+    {
+        return view('delete',
         [
             'review' => $review
         ]);

@@ -18,7 +18,7 @@
 
             <ul>
                 <li><a href="{{ route('editForm', $review) }}">Edit</a></li>
-                <li><a href="#">Delete</a></li>
+                <li><a href="{{ route('deleteConfirmation', $review) }}">Delete</a></li>
             </ul>
         </div>
 </section>

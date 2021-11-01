@@ -59,3 +59,9 @@ Route::get('review/edit/{review}', [ReviewController::class, 'editForm']
 
 Route::post('/edit/{review:id}', [ReviewController::class, 'updateReview']
 )->name('editSubmit');
+
+Route::get('/review/delete/{review}', [ReviewController::class, 'deleteConfirmation']
+)->name('deleteConfirmation');
+
+Route::delete('/delete/{review:id}', [ReviewController::class, 'deleteReview']
+)->name('deleteReview');
