@@ -8,15 +8,20 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function loginForm()
     {
         return view('login');
     }
 
+    /**
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function authenticate(LoginRequest $request)
     {
-
-
         if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
 
@@ -28,6 +33,10 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout(Request $request)
     {
         Auth::logout();

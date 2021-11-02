@@ -12,6 +12,12 @@ use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
+
+
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function getAllReviews()
     {
         return view('main',
@@ -26,6 +32,10 @@ class ReviewController extends Controller
         return view('new');
     }
 
+    /**
+     * @param ReviewRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function storeData(ReviewRequest $request)
     {
        /* $review = new Review;
@@ -57,20 +67,30 @@ class ReviewController extends Controller
 
     }
 
-    public function updateReview(ReviewRequest $request, $id)
+    public function updateReview(ReviewRequest $request, Review $review)
     {
-        Review::where('id', $id)
-            ->update($request->validated());
+        if($review->user_id === Auth::user()->id || $review->user->is_admin){
+            Review::where('id', $review->id)
+                ->update($request->validated());
 
-        return redirect()->route('singleReview', $id);
+            return redirect()->route('singleReview', $review->id);
+        }else{
+            return redirect()->route('singleReview', $review->id);
+        }
+
     }
 
-    public function deleteReview(Request $request, $id)
+    public function deleteReview(Request $request, Review $review)
     {
-        Review::where('id', $id)
-            ->delete();
+        if($review->user_id === Auth::user()->id || Auth::user()->is_admin){
+            Review::where('id', $review->id)
+                ->delete();
 
-        return redirect()->route('main');
+            return redirect()->route('main');
+        }else{
+            return redirect()->route('singleReview', $review->id);
+        }
+
     }
 
 
@@ -79,7 +99,7 @@ class ReviewController extends Controller
         $user = Auth::user();
         return view('main',
             [
-                'reviews' => $user->reviews
+                'reviews' => $user->reviews->load(["user", "artist", "album"])
             ]);
     }
 

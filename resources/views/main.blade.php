@@ -21,7 +21,9 @@
             <p class="text">Rating: {{ number_format($review->rating, 1) }}</p> <br />
             <p class="text">User: {{ $review->user->name }}</p> <br />
 
+            @if(Auth::check())
             <a href="{{ route('singleReview', $review) }}">Go to review</a>
+            @endif
 
         </div>
 
