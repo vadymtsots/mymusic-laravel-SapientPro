@@ -1,12 +1,4 @@
-@include('includes.head')
-<body>
-
-<header>
-
-    @include('includes.header')
-</header>
-
-<section class="card">
+<x-layout>
 
     <form action="{{ route('editSubmit', $review->id) }}" method="post">
         @csrf
@@ -40,18 +32,6 @@
 
 
         <input type="submit" class="button">
-
-
-
     </form>
 
-</section>
-
-<footer>
-    @include('includes.footer')
-</footer>
-
-
-
-</body>
-</html>
+</x-layout>

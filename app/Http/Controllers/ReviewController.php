@@ -12,9 +12,6 @@ use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
-
-
-
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -22,7 +19,7 @@ class ReviewController extends Controller
     {
         return view('main',
         [
-            'reviews' => Review::with("user", "artist", "album")->get(),
+            'reviews' => Review::with("user", "artist", "album")->simplePaginate(6)
 
         ]);
     }
@@ -38,40 +35,18 @@ class ReviewController extends Controller
      */
     public function storeData(ReviewRequest $request)
     {
-       /* $review = new Review;
-
-        $review->user_id = $request->input('user_id');
-        $review->artist_id = $request->input('artist_id');
-        $review->album_id = $request->input('album_id');
-        $review->review_body = $request->input('review_body');
-        $review->rating = $request->input('rating');
-        $review->save(); */
-
-       /* $validatedData = $request->validate(
-       [
-           'user_id' => 'required|exists:App\Models\User,id',
-           'artist_id' => 'required|exists:App\Models\Artist,id',
-           'album_id' => 'required|exists:App\Models\Album,id',
-           'review_body' => 'required|max:1000',
-           'rating' => 'required|numeric|between:1,10'
-       ]);
-
-       Review::create($request->all()); */
-
-
        $review = new Review;
        $review->fill($request->validated());
        $review->save();
 
-        return redirect()->route('addReview');
-
+       return redirect()->route('addReview');
     }
 
     public function updateReview(ReviewRequest $request, Review $review)
     {
         if($review->user_id === Auth::user()->id || $review->user->is_admin){
-            Review::where('id', $review->id)
-                ->update($request->validated());
+
+            $review->where('id', $review->id)->fill($request->validated());
 
             return redirect()->route('singleReview', $review->id);
         }else{
@@ -83,8 +58,8 @@ class ReviewController extends Controller
     public function deleteReview(Request $request, Review $review)
     {
         if($review->user_id === Auth::user()->id || Auth::user()->is_admin){
-            Review::where('id', $review->id)
-                ->delete();
+
+            $review->where('id', $review->id)->delete();
 
             return redirect()->route('main');
         }else{

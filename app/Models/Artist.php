@@ -23,4 +23,12 @@ class Artist extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function scopeSearch($query, array $filters)
+    {
+        if($filters['search'] ?? false){
+            $query->
+                where('name', 'like', '%' . request('search') . '%');
+        }
+    }
+
 }

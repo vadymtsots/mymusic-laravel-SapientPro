@@ -20,7 +20,7 @@ class AlbumSeeder extends Seeder
 
         $artist = Artist::factory();
         Album::factory()
-            ->count(3)
+            ->count(10)
             ->for($artist)
             ->create();
     }

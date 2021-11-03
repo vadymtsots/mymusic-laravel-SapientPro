@@ -21,6 +21,7 @@
     <ul>
         <li><a href="{{ route('loginForm') }}">Sign In</a></li>
         <li><a href="{{ route('registration') }}">Register</a></li>
+        <li><a href="{{ route('getArtists') }}">Artists</a></li>
     </ul>
     @endif
 

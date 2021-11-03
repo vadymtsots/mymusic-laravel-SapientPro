@@ -1,14 +1,4 @@
-
-@include('includes.head')
-<body>
-
-<header>
-
-    @include('includes.header')
-</header>
-
-<section class="card">
-
+<x-layout>
         <div class="review">
             <p class="text">Artist: {{ $review->artist->name }}</p> <br />
             <p class="text">Album: {{ $review->album->name }}</p> <br />
@@ -27,13 +17,4 @@
             </ul>
             @endif
         </div>
-</section>
-
-<footer>
-    @include('includes.footer')
-</footer>
-
-
-
-</body>
-</html>
+</x-layout>

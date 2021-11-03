@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
@@ -65,3 +66,6 @@ Route::get('/review/delete/{review}', [ReviewController::class, 'deleteConfirmat
 
 Route::delete('/delete/{review:id}', [ReviewController::class, 'deleteReview']
 )->name('deleteReview');
+
+Route::get('/artists', [ArtistController::class, 'getArtists']
+)->name('getArtists');
