@@ -69,3 +69,6 @@ Route::delete('/delete/{review:id}', [ReviewController::class, 'deleteReview']
 
 Route::get('/artists', [ArtistController::class, 'getArtists']
 )->name('getArtists');
+
+Route::get('/artists/search', [ArtistController::class, 'searchArtist']
+)->name('searchArtist');

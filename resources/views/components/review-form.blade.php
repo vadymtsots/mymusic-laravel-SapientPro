@@ -2,12 +2,7 @@
 
     @csrf
     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-
-    <label for="artist_id">Artist</label>
-    <input type="text" id="artist_id" name="artist_id">
-    @error('artist_id')
-    <div class="error"> {{ $message }} </div>
-    @enderror
+    <input type="hidden" id="artist_id" name="artist_id" value="{{ $artist->id }}">
 
     <label for="album_id">Album</label>
     <input type="text" id="album_id" name="album_id">

@@ -26,7 +26,10 @@ class ReviewController extends Controller
 
     public function addReviewForm()
     {
-        return view('new');
+        return view('new',
+        [
+            'artist' => Artist::artist(request(['artist']))->firstOrFail()
+        ]);
     }
 
     /**

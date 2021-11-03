@@ -9,6 +9,8 @@ class Artist extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id";
+
     protected $fillable = ['name'];
 
     public $timestamps = false;
@@ -23,11 +25,15 @@ class Artist extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function scopeSearch($query, array $filters)
+    /**
+     * @param $query
+     * @param array $filters
+     */
+    public function scopeArtist($query, array $filters)
     {
-        if($filters['search'] ?? false){
+        if($filters['artist'] ?? false){
             $query->
-                where('name', 'like', '%' . request('search') . '%');
+                where('name', 'like', '%' . request('artist') . '%');
         }
     }
 

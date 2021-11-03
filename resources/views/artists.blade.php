@@ -2,7 +2,7 @@
 
     <form action="" method="get">
         <label for="search">Search an artist</label>
-        <input type="text" name="search" value="{{ request('search') }}">
+        <input type="text" name="artist" value="{{ request('artist') }}">
     </form>
 
     @foreach($artists as $artist)

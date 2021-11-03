@@ -11,7 +11,18 @@ class ArtistController extends Controller
     {
 //            Artist::search(request(['artist']))->get();
         return view('artists', [
-            'artists' => $artist->search(request(['search']))->simplePaginate(5)
+            'artists' => $artist->artist(request(['artist']))->simplePaginate(5)
         ]);
+    }
+
+    public function searchArtist(Artist $artist)
+    {
+       return view('new',
+           [
+           'artist' => $artist->artist(request(['artist']))->get()
+           ]);
+
+
+
     }
 }
