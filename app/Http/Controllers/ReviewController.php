@@ -27,14 +27,7 @@ class ReviewController extends Controller
     public function addReviewForm(Artist $artist, Album $album)
     {
         $artist = Artist::artist(request(['artist']))->firstOrFail();
-        return view('new',
-        [
-
-            'artist' => $artist,
-            'albums' => $artist->albums->load('artist'),
-            'album' => $album
-
-        ]);
+        return view('new');
     }
 
     /**
