@@ -19,16 +19,21 @@ class ReviewController extends Controller
     {
         return view('main',
         [
-            'reviews' => Review::with("user", "artist", "album")->simplePaginate(6)
+            'reviews' => Review::latest()->with("user", "artist", "album")->simplePaginate(6)
 
         ]);
     }
 
-    public function addReviewForm()
+    public function addReviewForm(Artist $artist, Album $album)
     {
+        $artist = Artist::artist(request(['artist']))->firstOrFail();
         return view('new',
         [
-            'artist' => Artist::artist(request(['artist']))->firstOrFail()
+
+            'artist' => $artist,
+            'albums' => $artist->albums->load('artist'),
+            'album' => $album
+
         ]);
     }
 
@@ -49,7 +54,7 @@ class ReviewController extends Controller
     {
         if($review->user_id === Auth::user()->id || $review->user->is_admin){
 
-            $review->where('id', $review->id)->fill($request->validated());
+            $review->where('id', $review->id)->update($request->validated());
 
             return redirect()->route('singleReview', $review->id);
         }else{

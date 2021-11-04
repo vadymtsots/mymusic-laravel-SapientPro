@@ -142,6 +142,7 @@ input{
 }
 
 .pagination_links{
+    display: flex;
     text-align: justify;
 }
 

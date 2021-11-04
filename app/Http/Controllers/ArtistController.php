@@ -17,10 +17,7 @@ class ArtistController extends Controller
 
     public function searchArtist(Artist $artist)
     {
-       return view('new',
-           [
-           'artist' => $artist->artist(request(['artist']))->get()
-           ]);
+       return view('new');
 
 
 
