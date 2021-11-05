@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReviewController;
@@ -55,6 +56,9 @@ Route::get('/users/user:id', [ReviewController::class, 'getUserReviews']
 Route::get('/reviews/{review}', [ReviewController::class, 'getSingleReview']
 )->name('singleReview');
 
+Route::get('albums/{album}', [AlbumController::class, 'getAlbum']
+)->name('getAlbum');
+
 Route::get('review/edit/{review}', [ReviewController::class, 'editForm']
 )->name('editForm');
 
@@ -70,5 +74,7 @@ Route::delete('/delete/{review:id}', [ReviewController::class, 'deleteReview']
 Route::get('/artists', [ArtistController::class, 'getArtists']
 )->name('getArtists');
 
-Route::get('/artists/search', [ArtistController::class, 'searchArtist']
-)->name('searchArtist');
+//Route::get('/artists/search', [ArtistController::class, 'searchArtist']
+//)->name('searchArtist');
+
+
