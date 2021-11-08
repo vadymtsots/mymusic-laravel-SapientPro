@@ -23,6 +23,6 @@
 
     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
     <input type="hidden" id="artist_id" name="artist_id" value="{{ $artist->id }}">
-    <!-- <input type="hidden" id="album_id" name="album_id" value="{{-- $album->id --}}"> -->
+
 
 

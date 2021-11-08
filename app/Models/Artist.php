@@ -29,9 +29,9 @@ class Artist extends Model
      * @param $query
      * @param array $filters
      */
-    public function scopeArtist($query, array $filters)
+    public function scopeArtist($query)
     {
-        if($filters['artist'] ?? false){
+        if(request('artist')){
             $query->
                 where('name', 'like', '%' . request('artist') . '%');
         }

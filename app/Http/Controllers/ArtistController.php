@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Artist;
+use PhpMyAdmin\Response;
 
 class ArtistController extends Controller
 {
@@ -19,7 +20,11 @@ class ArtistController extends Controller
     {
        return view('new');
 
+    }
 
-
+    public function getArtist(Request $request)
+    {
+        $artist = Artist::artist()->firstOrFail();
+        return response()->json(['id' => $artist->id ,'name' => $artist->name]);
     }
 }

@@ -77,4 +77,7 @@ Route::get('/artists', [ArtistController::class, 'getArtists']
 //Route::get('/artists/search', [ArtistController::class, 'searchArtist']
 //)->name('searchArtist');
 
+Route::get('/new/{artist:name}', [ArtistController::class, 'getArtist']
+)->name('fetchArtist');
+
 
