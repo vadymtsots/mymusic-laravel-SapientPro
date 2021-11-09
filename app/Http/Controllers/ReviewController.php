@@ -72,10 +72,10 @@ class ReviewController extends Controller
 
     public function getUserReviews(User $user)
     {
-        $user = Auth::user();
+        $userId = Auth::user()->id;
         return view('main',
             [
-                'reviews' => $user->reviews->load(["user", "artist", "album"])
+                'reviews' => Review::latest()->where('user_id', $userId)->simplePaginate(6)
             ]);
     }
 
@@ -84,6 +84,7 @@ class ReviewController extends Controller
         return view('review',
             [
                 'review' => $review
+
 
             ]);
     }

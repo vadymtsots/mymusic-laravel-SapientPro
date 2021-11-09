@@ -5,16 +5,16 @@
 
         <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
 
-        <label for="artist_id">Artist</label>
-        <input type="text" id="artist_id" name="artist_id" value="{{ $review->artist_id }}">
-        @error('artist_id')
+        <label for="artist">Artist</label>
+        <input type="text" id="artist" name="artist" value="{{ $review->artist->name }}" disabled>
+        @error('artist')
         <div class="error"> {{ $message }} </div>
         @enderror
 
 
-        <label for="album_id">Album</label>
-        <input type="text" id="album_id" name="album_id" value="{{ $review->album_id }}">
-        @error('album_id')
+        <label for="album">Album</label>
+        <input type="text" id="album" name="album" value="{{ $review->album->name }}" disabled>
+        @error('album')
         <div class="error"> {{ $message }} </div>
         @enderror
 
@@ -30,7 +30,8 @@
         <div class="error"> {{ $message }} </div>
         @enderror
 
-
+        <input type="hidden" id="artist_id" name="artist_id" value="{{ $review->artist_id }}">
+        <input type="hidden" id="album_id" name="album_id" value="{{ $review->album_id }}">
         <input type="submit" class="button">
     </form>
 

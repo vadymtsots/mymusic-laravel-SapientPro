@@ -50,7 +50,7 @@ Route::post('/logout', [LoginController::class, 'logout']
 Route::post('/registration', [UserController::class, 'storeData']
 )->name('registrationSubmit');
 
-Route::get('/users/user:id', [ReviewController::class, 'getUserReviews']
+Route::get('/users', [ReviewController::class, 'getUserReviews']
 )->name('userReviews');
 
 Route::get('/reviews/{review}', [ReviewController::class, 'getSingleReview']

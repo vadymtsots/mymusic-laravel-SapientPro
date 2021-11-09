@@ -26,7 +26,7 @@ class AlbumDropdown extends Component
      */
     public function render()
     {
-        $artist = Artist::artist(request(['artist']))->firstOrFail();
+        $artist = Artist::artist()->firstOrFail();
         return view('components.album-dropdown',
         [
            'albums' => $artist->albums->load('artist')

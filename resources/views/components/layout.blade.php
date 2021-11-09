@@ -15,5 +15,6 @@
     @include('includes.footer')
 </footer>
 
+<script src="{{ asset('/js/fetchArtist.js') }}"></script>
 </body>
 </html>

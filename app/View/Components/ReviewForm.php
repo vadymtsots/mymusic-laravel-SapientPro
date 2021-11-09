@@ -26,7 +26,7 @@ class ReviewForm extends Component
     {
         return view('components.review-form',
         [
-            'artist' => Artist::artist(request(['artist']))->firstOrFail()
+            'artist' => Artist::artist()->firstOrFail()
         ]);
     }
 }

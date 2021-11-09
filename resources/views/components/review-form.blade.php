@@ -22,7 +22,8 @@
     <input type="submit" name="submit" id="submit" class="button">
 
     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-    <input type="hidden" id="artist_id" name="artist_id" value="{{ $artist->id }}">
+    <input type="hidden" id="artist_id" name="artist_id">
+
 
 
 
