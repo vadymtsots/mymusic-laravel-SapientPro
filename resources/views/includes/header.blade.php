@@ -11,11 +11,12 @@
             <input type="submit" value="Logout" class="logout">
             </form>
 
-    <ul>
-        <li><a href="{{ route('addReview') }}" class="add"><p>Add new review</p></a></li>
-        <li><a href="{{ route('userReviews', ['id' => Auth::user()->id]) }}" class="add"><p>My reviews</p></a></li>
-
-    </ul>
+    <div class="links">
+        <ul>
+            <li><a href="{{ route('addReview') }}" class="add">Add new review</a></li>
+            <li><a href="{{ route('userReviews', ['id' => Auth::user()->id]) }}" class="add">My reviews</a></li>
+        </ul>
+    </div>
 
     @else
     <ul>

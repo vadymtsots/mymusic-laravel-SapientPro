@@ -139,11 +139,27 @@ input{
 
 .add{
     text-align: left;
+    text-decoration: none;
 }
 
 .pagination_links{
-    display: flex;
-    text-align: justify;
+    position: relative;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+}
+
+.links{
+    position: relative;
+    right: 85%;
+}
+.links a{
+    text-decoration: none;
+    width: 1%;
+}
+
+.links li{
+    margin: 2px;
 }
 
 
