@@ -6,15 +6,11 @@
             <p class="text">Rating: {{ number_format($review->rating, 1) }}</p> <br />
             <p class="text">User: {{ $review->user->name }}</p> <br />
 
-            @if($review->user->id === Auth::user()->id)
+            {{-- @if($review->user->id === Auth::user()->id || Auth::user()->is_admin) --}}
             <ul>
                 <li><a href="{{ route('editForm', $review) }}">Edit</a></li>
                 <li><a href="{{ route('deleteConfirmation', $review) }}">Delete</a></li>
             </ul>
-            @elseif(Auth::user()->is_admin)
-            <ul>
-                <li><a href="{{ route('deleteConfirmation', $review) }}">Delete</a></li>
-            </ul>
-            @endif
+           {{-- @endif --}}
         </div>
 </x-layout>

@@ -42,7 +42,9 @@ Route::get('/login/form', [LoginController::class, 'loginForm']
 )->name('loginForm');
 
 Route::post('/auth', [LoginController::class, 'authenticate']
-)->name('auth');
+)->name('auth')
+->middleware('throttle:5,5');
+
 
 Route::post('/logout', [LoginController::class, 'logout']
 )->name('logout');
@@ -52,6 +54,7 @@ Route::post('/registration', [UserController::class, 'storeData']
 
 Route::get('/users', [ReviewController::class, 'getUserReviews']
 )->name('userReviews');
+
 
 Route::get('/reviews/{review}', [ReviewController::class, 'getSingleReview']
 )->name('singleReview');

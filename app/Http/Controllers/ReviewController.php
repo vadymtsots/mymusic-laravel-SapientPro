@@ -9,6 +9,7 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReviewRequest;
+use Illuminate\Support\Facades\Gate;
 
 class ReviewController extends Controller
 {
@@ -45,20 +46,23 @@ class ReviewController extends Controller
 
     public function updateReview(ReviewRequest $request, Review $review)
     {
-        if($review->user_id === Auth::user()->id || $review->user->is_admin){
+//        if($review->user_id === Auth::user()->id || Auth::user()->is_admin)
+        if(Gate::allows('update-review', $review) || Auth::user()->is_admin) {
 
             $review->where('id', $review->id)->update($request->validated());
 
             return redirect()->route('singleReview', $review->id);
         }else{
-            return redirect()->route('singleReview', $review->id);
+//            return redirect()->route('singleReview', $review->id);
+            abort(403);
         }
 
     }
 
     public function deleteReview(Request $request, Review $review)
     {
-        if($review->user_id === Auth::user()->id || Auth::user()->is_admin){
+//        if($review->user_id === Auth::user()->id || Auth::user()->is_admin){
+        if(Gate::allows('update-review', $review) || Auth::user()->is_admin) {
 
             $review->where('id', $review->id)->delete();
 

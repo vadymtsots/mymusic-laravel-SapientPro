@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class LoginController extends Controller
 {
+
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -22,9 +25,8 @@ class LoginController extends Controller
      */
     public function authenticate(LoginRequest $request)
     {
-        if (Auth::attempt($request->validated())) {
+        if (Auth::attempt($request->validated(), true)) {
             $request->session()->regenerate();
-
             return redirect()->route('main');
         }
 

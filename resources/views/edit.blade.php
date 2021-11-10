@@ -3,7 +3,7 @@
     <form action="{{ route('editSubmit', $review->id) }}" method="post">
         @csrf
 
-        <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+        <input type="hidden" id="user_id" name="user_id" value="{{ $review->user->id }}">
 
         <label for="artist">Artist</label>
         <input type="text" id="artist" name="artist" value="{{ $review->artist->name }}" disabled>
@@ -30,8 +30,8 @@
         <div class="error"> {{ $message }} </div>
         @enderror
 
-        <input type="hidden" id="artist_id" name="artist_id" value="{{ $review->artist_id }}">
-        <input type="hidden" id="album_id" name="album_id" value="{{ $review->album_id }}">
+        <input type="hidden" id="artist_id" name="artist_id" value="{{ $review->artist->id }}">
+        <input type="hidden" id="album_id" name="album_id" value="{{ $review->album->id }}">
         <input type="submit" class="button">
     </form>
 
