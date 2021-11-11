@@ -12,7 +12,7 @@ class ArtistController extends Controller
     {
 //            Artist::search(request(['artist']))->get();
         return view('artists', [
-            'artists' => $artist->artist(request(['artist']))->simplePaginate(5)
+            'artists' => $artist->artistSearch(request(['artist']))->simplePaginate(5)
         ]);
     }
 

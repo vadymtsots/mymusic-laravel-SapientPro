@@ -92,7 +92,7 @@ Route::post(
 )->name('registrationSubmit');
 
 Route::get(
-    '/users',
+    '/user-reviews',
     [ReviewController::class, 'getUserReviews']
 )->name('userReviews');
 
@@ -100,6 +100,11 @@ Route::get(
     'user/{user:name}',
     [UserController::class, 'getUser']
 )->name('getUser');
+
+Route::get(
+    '/users',
+    [UserController::class, 'getAllUsers']
+)->name('users');
 
 /**
  * Authentication related routes

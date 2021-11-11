@@ -3,7 +3,6 @@
 <nav class="navbar">
     @if(Auth::check())
 
-
         <p>Logged in as: {{ Auth::user()->name }}</p>
 
             <form action="{{ route('logout') }}" method="post">
@@ -15,6 +14,9 @@
         <ul>
             <li><a href="{{ route('addReview') }}" class="add">Add new review</a></li>
             <li><a href="{{ route('userReviews', ['id' => Auth::user()->id]) }}" class="add">My reviews</a></li>
+            @if(Auth::user()->is_admin)
+                <li><a href="{{ route('users') }}">Users</a></li>
+            @endif
         </ul>
     </div>
 

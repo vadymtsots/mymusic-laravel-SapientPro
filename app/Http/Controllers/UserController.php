@@ -25,6 +25,14 @@ class UserController extends Controller
         return redirect()->route('main');
     }
 
+    public function getAllUsers(User $user)
+    {
+        return view('users-list', [
+            'users' => $user->latest()->with('reviews')->simplePaginate(6),
+            'numberOfReviews' => $user->reviews->count()
+        ]);
+    }
+
     public function getUser(User $user)
     {
         return view('user',
