@@ -13,15 +13,18 @@ class CreateReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('artist_id')->constrained('artists');
-            $table->foreignId('album_id')->constrained('albums');
-            $table->string('review_body');
-            $table->string('rating');
-            $table->timestamps();
-        });
+        Schema::create(
+            'reviews',
+            function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('user_id')->constrained('users');
+                $table->foreignId('artist_id')->constrained('artists');
+                $table->foreignId('album_id')->constrained('albums');
+                $table->string('review_body');
+                $table->string('rating');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

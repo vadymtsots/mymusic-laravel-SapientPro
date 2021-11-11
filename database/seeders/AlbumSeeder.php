@@ -17,11 +17,12 @@ class AlbumSeeder extends Seeder
      */
     public function run()
     {
-
         $artist = Artist::factory();
         Album::factory()
-            ->count(10)
-            ->for($artist)
+            ->count(7)
+            ->forArtist([
+                'name' => 'cum'
+                        ])
             ->create();
     }
 }

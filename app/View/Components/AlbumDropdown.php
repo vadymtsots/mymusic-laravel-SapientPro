@@ -16,7 +16,6 @@ class AlbumDropdown extends Component
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -26,11 +25,13 @@ class AlbumDropdown extends Component
      */
     public function render()
     {
-        $artist = Artist::artist()->firstOrFail();
-        return view('components.album-dropdown',
-        [
-           'albums' => $artist->albums->load('artist')
+        $artist = Artist::searchArtist()->firstOrFail();
+        return view(
+            'components.album-dropdown',
+            [
+                'albums' => $artist->albums->load('artist')
 
-        ]);
+            ]
+        );
     }
 }

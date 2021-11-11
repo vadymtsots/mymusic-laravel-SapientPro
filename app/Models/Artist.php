@@ -29,11 +29,11 @@ class Artist extends Model
      * @param $query
      * @param array $filters
      */
-    public function scopeArtist($query)
+    public function scopeSearchArtist($query)
     {
         if(request('artist')){
             $query->
-                where('name', 'like', '%' . request('artist') . '%');
+                where('name', 'like', request('artist'));
         }
     }
 

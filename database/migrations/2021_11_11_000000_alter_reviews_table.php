@@ -13,9 +13,13 @@ class AlterReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::table('reviews', function(Blueprint $table){
-            $table->decimal('rating')->change();
-        });
+        Schema::table(
+            'reviews',
+            function (Blueprint $table) {
+                $table->integer('rating')->change();
+                $table->string('title');
+            }
+        );
     }
 
     /**

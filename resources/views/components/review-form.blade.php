@@ -2,6 +2,11 @@
 
     @csrf
 
+    <label for="title">Review title (summary)</label>
+    <input name="title" id="title">
+    @error('title')
+    <div class="error"> {{ $message }} </div>
+    @enderror
 
 
     @error('albums')
@@ -13,7 +18,7 @@
     <div class="error"> {{ $message }} </div>
     @enderror
 
-    <label for="rating">Rating</label>
+    <label for="rating">Rating (out of 10)</label>
     <input type="text" name="rating" id="rating">
     @error('rating')
     <div class="error"> {{ $message }} </div>

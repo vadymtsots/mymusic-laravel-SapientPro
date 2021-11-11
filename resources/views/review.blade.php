@@ -1,10 +1,10 @@
 <x-layout>
         <div class="review">
-            <p class="text">Artist: {{ $review->artist->name }}</p> <br />
-            <p class="text">Album: {{ $review->album->name }}</p> <br />
-            <p class="text">Review: {{ $review->review_body }}</p> <br />
-            <p class="text">Rating: {{ number_format($review->rating, 1) }}</p> <br />
-            <p class="text">User: {{ $review->user->name }}</p> <br />
+            <h1 class="text">{{ $review->artist->name . " - "}} <a href="{{ route('getAlbum', $review->album) }}">{{$review->album->name }}</a></h1> <br/>
+            <h3 class="text">{{ $review->title }}</h3> <br/>
+            <p class="text">{{ $review->review_body }}</p> <br />
+            <p class="text">Rating: {{ $review->rating }}</p> <br />
+            <p class="text">Written by: <a href="{{ route('getUser', $review->user)  }}">{{ $review->user->name }}</a></p> <br/>
 
             {{-- @if($review->user->id === Auth::user()->id || Auth::user()->is_admin) --}}
             <ul>

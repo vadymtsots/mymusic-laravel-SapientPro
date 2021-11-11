@@ -25,11 +25,12 @@ class ReviewRequest extends FormRequest
     {
         return [
 
-                'user_id' => 'required|exists:App\Models\User,id',
-                'artist_id' => 'required|exists:App\Models\Artist,id',
-                'album_id' => 'required|exists:App\Models\Album,id',
-                'review_body' => 'required|max:1000',
-                'rating' => 'required|numeric|between:1,10'
+            'user_id' => 'required|exists:App\Models\User,id',
+            'artist_id' => 'required|exists:App\Models\Artist,id',
+            'album_id' => 'required|exists:App\Models\Album,id',
+            'review_body' => 'required|max:1000',
+            'rating' => 'required|integer|between:1,10',
+            'title' => 'required|max:50'
 
         ];
     }

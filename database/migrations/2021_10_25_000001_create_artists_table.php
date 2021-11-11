@@ -13,10 +13,13 @@ class CreateArtistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('artists', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-        });
+        Schema::create(
+            'artists',
+            function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+            }
+        );
     }
 
     /**

@@ -1,11 +1,12 @@
-@props(["review"])
+@props(["review", "user"])
 
 <div class="review">
-    <p class="text">Artist: {{ $review->artist->name }}</p> <br />
-    <p class="text">Album: <a href="{{ route('getAlbum', $review->album) }}">{{ $review->album->name }}</a></p> <br />
-    <p class="text">Review: {{ $review->review_body }}</p> <br />
-    <p class="text">Rating: {{ number_format($review->rating, 1) }}</p> <br />
-    <p class="text">User: {{ $review->user->name }}</p> <br />
+    <h1 class="text">{{ $review->artist->name . " - "}} <a href="{{ route('getAlbum', $review->album) }}">{{$review->album->name }}</a></h1> <br/>
+    <h3 class="text">{{ $review->title }}</h3> <br/>
+    <p class="text">Rating: {{ $review->rating }}</p> <br/>
+    <p class="text">Written by: <a href="{{ route('getUser', $review->user)  }}">{{ $review->user->name }}</a></p> <br/>
+
+    <a href="{{ route('getAlbum', $review->album) }}">Go to album</a>
 
     @if(Auth::check())
         <a href="{{ route('singleReview', $review) }}">Go to review</a>

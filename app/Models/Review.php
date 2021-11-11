@@ -11,7 +11,7 @@ class Review extends Model
 
     use HasFactory;
 
-    protected $fillable = ['user_id', 'artist_id', 'album_id', 'review_body', 'rating'];
+    protected $fillable = ['user_id', 'artist_id', 'album_id', 'review_body', 'rating', 'title'];
 
     protected $guarded = ['_token'];
 

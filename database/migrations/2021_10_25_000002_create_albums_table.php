@@ -13,13 +13,15 @@ class CreateAlbumsTable extends Migration
      */
     public function up()
     {
-        Schema::create('albums', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('artist_id')->constrained('artists');
-            $table->string('name');
-            $table->year('release_year');
-
-        });
+        Schema::create(
+            'albums',
+            function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('artist_id')->constrained('artists');
+                $table->string('name');
+                $table->year('release_year');
+            }
+        );
     }
 
     /**

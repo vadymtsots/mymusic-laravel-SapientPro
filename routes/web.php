@@ -18,69 +18,138 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/',
+    function () {
+        return view('welcome');
+    }
+);
 
-Route::get('/success', function () {
-    return view('success');
-})->name('registration.success');
+/**
+ * Reviews related routes
+ */
 
-Route::get('/main', [ReviewController::class, 'getAllReviews']
+Route::get(
+    '/main',
+    [ReviewController::class, 'getAllReviews']
 )->name('main');
 
-Route::get('/registration/newuser', [UserController::class, 'showForm']
-)->name('registration');
-
-Route::get('new', [ReviewController::class, 'addReviewForm']
+Route::get(
+    'new',
+    [ReviewController::class, 'addReviewForm']
 )->name('addReview');
 
-Route::post('new/review', [ReviewController::class, 'storeData']
+Route::post(
+    'new/review',
+    [ReviewController::class, 'storeData']
 )->name('reviewSubmit');
 
-Route::get('/login/form', [LoginController::class, 'loginForm']
-)->name('loginForm');
+Route::get(
+    '/success',
+    function () {
+        return view('success');
+    }
+)->name('registration.success');
 
-Route::post('/auth', [LoginController::class, 'authenticate']
-)->name('auth')
-->middleware('throttle:5,5');
-
-
-Route::post('/logout', [LoginController::class, 'logout']
-)->name('logout');
-
-Route::post('/registration', [UserController::class, 'storeData']
-)->name('registrationSubmit');
-
-Route::get('/users', [ReviewController::class, 'getUserReviews']
-)->name('userReviews');
-
-
-Route::get('/reviews/{review}', [ReviewController::class, 'getSingleReview']
+Route::get(
+    '/reviews/{review}',
+    [ReviewController::class, 'getSingleReview']
 )->name('singleReview');
 
-Route::get('albums/{album}', [AlbumController::class, 'getAlbum']
-)->name('getAlbum');
-
-Route::get('review/edit/{review}', [ReviewController::class, 'editForm']
+Route::get(
+    'review/edit/{review}',
+    [ReviewController::class, 'editForm']
 )->name('editForm');
 
-Route::post('/edit/{review:id}', [ReviewController::class, 'updateReview']
+Route::post(
+    '/edit/{review:id}',
+    [ReviewController::class, 'updateReview']
 )->name('editSubmit');
 
-Route::get('/review/delete/{review}', [ReviewController::class, 'deleteConfirmation']
+Route::get(
+    '/review/delete/{review}',
+    [ReviewController::class, 'deleteConfirmation']
 )->name('deleteConfirmation');
 
-Route::delete('/delete/{review:id}', [ReviewController::class, 'deleteReview']
+Route::delete(
+    '/delete/{review:id}',
+    [ReviewController::class, 'deleteReview']
 )->name('deleteReview');
 
-Route::get('/artists', [ArtistController::class, 'getArtists']
+/**
+ * User related routes
+ */
+
+
+Route::get(
+    '/registration/newuser',
+    [UserController::class, 'showForm']
+)->name('registration');
+
+Route::post(
+    '/registration',
+    [UserController::class, 'storeData']
+)->name('registrationSubmit');
+
+Route::get(
+    '/users',
+    [ReviewController::class, 'getUserReviews']
+)->name('userReviews');
+
+Route::get(
+    'user/{user:name}',
+    [UserController::class, 'getUser']
+)->name('getUser');
+
+/**
+ * Authentication related routes
+ */
+
+
+Route::get(
+    '/login/form',
+    [LoginController::class, 'loginForm']
+)->name('loginForm');
+
+Route::post(
+    '/auth',
+    [LoginController::class, 'authenticate']
+)->name('auth')
+    ->middleware('throttle:5,5');
+
+
+Route::post(
+    '/logout',
+    [LoginController::class, 'logout']
+)->name('logout');
+
+/**
+ * Artists related routes
+ */
+
+Route::get(
+    '/artists',
+    [ArtistController::class, 'getArtists']
 )->name('getArtists');
 
 //Route::get('/artists/search', [ArtistController::class, 'searchArtist']
 //)->name('searchArtist');
 
-Route::get('/new/{artist:name}', [ArtistController::class, 'getArtist']
+Route::get(
+    '/new/{artist:name}',
+    [ArtistController::class, 'getArtist']
 )->name('fetchArtist');
+
+/**
+ * Album related routes
+ */
+Route::get(
+    'albums/{album}',
+    [AlbumController::class, 'getAlbum']
+)->name('getAlbum');
+
+
+
+
 
 

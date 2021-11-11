@@ -24,7 +24,7 @@ class ArtistField extends Component
      */
     public function render()
     {
-        $artist = Artist::artist()->firstOrFail();
+        $artist = Artist::searchArtist()->firstOrFail();
         return view('components.artist-field',
         [
             'artist' => $artist

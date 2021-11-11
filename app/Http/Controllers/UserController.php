@@ -16,14 +16,21 @@ class UserController extends Controller
 
     public function storeData(UserRequest $request)
     {
+        $user = new User;
+        $user->fill($request->validated());
+        $user->save();
 
-      $user = new User;
-      $user->fill($request->validated());
-      $user->save();
-
-      Auth::login($user, $remember = true);
+        Auth::login($user, $remember = true);
 
         return redirect()->route('main');
+    }
 
+    public function getUser(User $user)
+    {
+        return view('user',
+        [
+            'user' => $user,
+            'numberOfReviews' => $user->reviews->count()
+        ]);
     }
 }

@@ -24,7 +24,7 @@ class ArtistController extends Controller
 
     public function getArtist(Request $request)
     {
-        $artist = Artist::artist()->firstOrFail();
+        $artist = Artist::searchArtist()->firstOrFail();
         $albums = $artist->albums;
         return response()->json(['id' => $artist->id ,'name' => $artist->name, 'albums' => $albums]);
     }

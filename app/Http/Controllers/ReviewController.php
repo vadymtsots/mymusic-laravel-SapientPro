@@ -18,16 +18,16 @@ class ReviewController extends Controller
      */
     public function getAllReviews()
     {
-        return view('main',
-        [
-            'reviews' => Review::latest()->with("user", "artist", "album")->simplePaginate(6)
-
-        ]);
+        return view(
+            'main',
+            [
+                'reviews' => Review::latest()->with("user", "artist", "album")->simplePaginate(6)
+            ]
+        );
     }
 
     public function addReviewForm()
     {
-        $artist = Artist::artist(request(['artist']))->firstOrFail();
         return view('new');
     }
 
@@ -37,76 +37,78 @@ class ReviewController extends Controller
      */
     public function storeData(ReviewRequest $request)
     {
-       $review = new Review;
-       $review->fill($request->validated());
-       $review->save();
+        $review = new Review;
+        $review->fill($request->validated());
+        $review->save();
 
-       return redirect()->route('addReview');
+        return redirect()->route('addReview');
     }
 
     public function updateReview(ReviewRequest $request, Review $review)
     {
 //        if($review->user_id === Auth::user()->id || Auth::user()->is_admin)
-        if(Gate::allows('update-review', $review) || Auth::user()->is_admin) {
-
+        if (Gate::allows('update-review', $review) || Auth::user()->is_admin) {
             $review->where('id', $review->id)->update($request->validated());
 
             return redirect()->route('singleReview', $review->id);
-        }else{
+        } else {
 //            return redirect()->route('singleReview', $review->id);
             abort(403);
         }
-
     }
 
-    public function deleteReview(Request $request, Review $review)
+    public function deleteReview(Review $review)
     {
 //        if($review->user_id === Auth::user()->id || Auth::user()->is_admin){
-        if(Gate::allows('update-review', $review) || Auth::user()->is_admin) {
-
+        if (Gate::allows('update-review', $review) || Auth::user()->is_admin) {
             $review->where('id', $review->id)->delete();
 
             return redirect()->route('main');
-        }else{
+        } else {
             return redirect()->route('singleReview', $review->id);
         }
-
     }
 
 
-    public function getUserReviews(User $user)
+    public function getUserReviews()
     {
         $userId = Auth::user()->id;
-        return view('main',
+        return view(
+            'main',
             [
                 'reviews' => Review::latest()->where('user_id', $userId)->simplePaginate(6)
-            ]);
+            ]
+        );
     }
 
     public function getSingleReview(Review $review)
     {
-        return view('review',
+        return view(
+            'review',
             [
                 'review' => $review
-
-
-            ]);
+            ]
+        );
     }
 
     public function editForm(Review $review)
     {
-        return view('edit',
-        [
-            'review' => $review
-        ]);
+        return view(
+            'edit',
+            [
+                'review' => $review
+            ]
+        );
     }
 
     public function deleteConfirmation(Review $review)
     {
-        return view('delete',
-        [
-            'review' => $review
-        ]);
+        return view(
+            'delete',
+            [
+                'review' => $review
+            ]
+        );
     }
 
 }
