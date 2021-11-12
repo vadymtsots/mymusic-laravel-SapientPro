@@ -7,8 +7,6 @@
     <p class="text">Written by: <a href="{{ route('getUser', $review->user)  }}">{{ $review->user->name }}</a></p> <br/>
 
     <a href="{{ route('getAlbum', $review->album) }}">Go to album</a>
+    <a href="{{ route('singleReview', $review) }}">Go to review</a>
 
-    @if(Auth::check())
-        <a href="{{ route('singleReview', $review) }}">Go to review</a>
-    @endif
 </div>

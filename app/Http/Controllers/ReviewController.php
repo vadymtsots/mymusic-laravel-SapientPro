@@ -44,23 +44,23 @@ class ReviewController extends Controller
         return redirect()->route('addReview');
     }
 
-    public function updateReview(ReviewRequest $request, Review $review)
+    public function updateReview(ReviewRequest $request, Review $review, User $user)
     {
-//        if($review->user_id === Auth::user()->id || Auth::user()->is_admin)
-        if (Gate::allows('update-review', $review) || Auth::user()->is_admin) {
+//      if($review->user_id === $user->id || $user->is_admin) {
+       if (Gate::allows('update-review', $review) || Auth::user()->is_admin) {
             $review->where('id', $review->id)->update($request->validated());
 
             return redirect()->route('singleReview', $review->id);
-        } else {
+     } else {
 //            return redirect()->route('singleReview', $review->id);
             abort(403);
-        }
+       }
     }
 
     public function deleteReview(Review $review)
     {
-//        if($review->user_id === Auth::user()->id || Auth::user()->is_admin){
-        if (Gate::allows('update-review', $review) || Auth::user()->is_admin) {
+        if($review->user_id === Auth::user()->id || Auth::user()->is_admin){
+//        if (Gate::allows('update-review', $review) || Auth::user()->is_admin) {
             $review->where('id', $review->id)->delete();
 
             return redirect()->route('main');
@@ -70,13 +70,25 @@ class ReviewController extends Controller
     }
 
 
-    public function getUserReviews()
+    public function getAuthenticatedUserReviews()
     {
         $userId = Auth::user()->id;
         return view(
             'main',
             [
                 'reviews' => Review::latest()->where('user_id', $userId)->simplePaginate(6)
+            ]
+        );
+    }
+
+    public function getUserReviews(User $user)
+    {
+
+        return view(
+            'main',
+            [
+                'reviews' => Review::latest()->where('user_id', $user->id)->simplePaginate(6),
+                'user' => $user
             ]
         );
     }

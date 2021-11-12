@@ -66,6 +66,7 @@ input{
     padding: 1px;
     width: 30%;
     margin: auto;
+    position: relative;
 
 }
 
@@ -160,6 +161,17 @@ input{
 
 .links li{
     margin: 2px;
+}
+
+.album-reviews{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border-block: 2px solid darkblue;
+}
+
+.review h2{
+    text-align: left;
 }
 
 

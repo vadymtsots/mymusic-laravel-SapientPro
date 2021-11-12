@@ -93,9 +93,16 @@ Route::post(
 )->name('registrationSubmit');
 
 Route::get(
-    '/user-reviews',
+    '/myreviews',
+    [ReviewController::class, 'getAuthenticatedUserReviews']
+)->name('authenticatedUserReviews');
+
+Route::get(
+    '/user-reviews/{user}',
     [ReviewController::class, 'getUserReviews']
 )->name('userReviews');
+
+
 
 Route::get(
     'user/{user:name}',

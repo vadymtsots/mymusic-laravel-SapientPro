@@ -25,8 +25,14 @@
         @enderror
 
         <label for="rating">Rating</label>
-        <input type="text" name="rating" id="rating" value="{{ number_format($review->rating, 1) }}">
+        <input type="text" name="rating" id="rating" value="{{ $review->rating }}">
         @error('rating')
+        <div class="error"> {{ $message }} </div>
+        @enderror
+
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value="{{ $review->title }}">
+        @error('title')
         <div class="error"> {{ $message }} </div>
         @enderror
 

@@ -28,36 +28,43 @@ class UserController extends Controller
 
     public function getAllUsers(User $user)
     {
-        return view('users-list', [
-            'users' => $user->latest()->with('reviews')->simplePaginate(6),
-            'numberOfReviews' => $user->reviews->count()
-        ]);
+        return view(
+            'users-list',
+            [
+                'users' => $user->latest()->with('reviews')->simplePaginate(6),
+                'numberOfReviews' => $user->reviews->count()
+            ]
+        );
     }
 
     public function getUser(User $user)
     {
-        return view('user',
-        [
-            'user' => $user,
-            'numberOfReviews' => $user->reviews->count()
-        ]);
+        return view(
+            'user',
+            [
+                'user' => $user,
+                'numberOfReviews' => $user->reviews->count()
+            ]
+        );
     }
 
     public function banConfirmation(User $user)
     {
-        return view('ban', [
-            'user' => $user
-        ]);
+        return view(
+            'ban',
+            [
+                'user' => $user
+            ]
+        );
     }
 
     public function banUser(User $user)
     {
-        if (Gate::allows('ban-user', $user)){
+        if (Gate::allows('ban-user', $user)) {
             User::where('id', $user->id)->update(['is_banned' => 1]);
             return redirect()->route('success');
-        }else{
+        } else {
             abort(403);
         }
-
     }
 }

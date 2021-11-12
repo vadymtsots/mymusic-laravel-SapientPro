@@ -20,7 +20,8 @@ class AlbumController extends Controller
             'album',
             [
                 'album' => $album,
-                'avgRating' => number_format($avgRating, 1)
+                'avgRating' => number_format($avgRating, 1),
+                'reviews' => $album->reviews
             ]
         );
     }
