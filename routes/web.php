@@ -49,7 +49,7 @@ Route::get(
     function () {
         return view('success');
     }
-)->name('registration.success');
+)->name('success');
 
 Route::get(
     '/reviews/{review}',
@@ -105,6 +105,18 @@ Route::get(
     '/users',
     [UserController::class, 'getAllUsers']
 )->name('users');
+
+Route::get(
+    '/user/ban/{user}',
+    [UserController::class, 'banConfirmation']
+)->name('banConfirmation');
+
+Route::post(
+    '/ban/{user:id}',
+    [UserController::class, 'banUser']
+)->name('banUser');
+
+
 
 /**
  * Authentication related routes

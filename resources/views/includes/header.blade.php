@@ -15,7 +15,7 @@
             <li><a href="{{ route('addReview') }}" class="add">Add new review</a></li>
             <li><a href="{{ route('userReviews', ['id' => Auth::user()->id]) }}" class="add">My reviews</a></li>
             @if(Auth::user()->is_admin)
-                <li><a href="{{ route('users') }}">Users</a></li>
+                <li><a href="{{ route('users') }}" class="add">Users</a></li>
             @endif
         </ul>
     </div>

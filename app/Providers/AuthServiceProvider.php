@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -29,6 +30,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('update-review', function(User $user, Review $review){
             return $user->id === $review->user->id;
+        });
+
+        Gate::define('ban-user', function(User $user){
+            return Auth::user()->is_admin;
         });
     }
 }
