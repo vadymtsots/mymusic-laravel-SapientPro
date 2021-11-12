@@ -5,6 +5,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\IsBanned;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -131,8 +132,8 @@ Route::get(
 Route::post(
     '/auth',
     [LoginController::class, 'authenticate']
-)->name('auth')
-    ->middleware('throttle:5,5');
+)->name('auth');
+
 
 
 Route::post(
