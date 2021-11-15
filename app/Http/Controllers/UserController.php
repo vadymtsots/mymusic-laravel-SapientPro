@@ -32,7 +32,19 @@ class UserController extends Controller
             'users-list',
             [
                 'users' => $user->latest()->with('reviews')->simplePaginate(6),
-                'numberOfReviews' => $user->reviews->count()
+                'numberOfReviews' => $user->reviews->count(),
+
+            ]
+        );
+    }
+
+    public function getBannedUsers(User $user)
+    {
+        return view(
+            'users-list',
+            [
+                'users' => $user->where('is_banned', "=", 1)->simplePaginate(6),
+                'banned' => true
             ]
         );
     }
@@ -64,7 +76,15 @@ class UserController extends Controller
             User::where('id', $user->id)->update(['is_banned' => 1]);
             return redirect()->route('success');
         } else {
-            abort(403);
+            return abort(403);
         }
     }
+
+    public function unBanUser(User $user)
+    {
+        User::where('id', $user->id)->update(['is_banned' => 0]);
+        return redirect()->route('success');
+    }
+
+
 }

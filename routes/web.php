@@ -115,6 +115,12 @@ Route::get(
 )->name('users');
 
 Route::get(
+    'users/banned',
+    [UserController::class, 'getBannedUsers']
+)->name('bannedUsers');
+
+
+Route::get(
     '/user/ban/{user}',
     [UserController::class, 'banConfirmation']
 )->name('banConfirmation');
@@ -140,8 +146,6 @@ Route::post(
     '/auth',
     [LoginController::class, 'authenticate']
 )->name('auth');
-
-
 
 Route::post(
     '/logout',
