@@ -17,9 +17,16 @@ class UserController extends Controller
 
     public function storeData(UserRequest $request)
     {
-        $user = new User;
-        $user->fill($request->validated());
-        $user->save();
+        if(request()->hasFile('avatar')){
+            $imageName = time() . '-' . $request->file('avatar')->getClientOriginalName();
+            $request->avatar->move(public_path('images'), $imageName);
+
+            $user = new User;
+            $user->fill($request->validated());
+            $user->avatar = $imageName;
+            $user->save();
+        }
+
 
         Auth::login($user, $remember = true);
 

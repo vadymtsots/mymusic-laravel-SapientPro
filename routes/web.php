@@ -130,6 +130,11 @@ Route::post(
     [UserController::class, 'banUser']
 )->name('banUser');
 
+Route::post(
+    '/ban/{user:id}',
+    [UserController::class, 'unBanUser']
+)->name('unBanUser');
+
 
 
 /**

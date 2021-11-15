@@ -14,6 +14,7 @@
         <ul>
             <li><a href="{{ route('addReview') }}" class="add">Add new review</a></li>
             <li><a href="{{ route('authenticatedUserReviews', ['id' => Auth::user()->id]) }}" class="add">My reviews</a></li>
+            <li><a href="{{ route('getUser', ['user' => Auth::user()]) }}" class="add">My profile</a></li>
             @if(Auth::user()->is_admin)
                 <li><a href="{{ route('users') }}" class="add">Users</a></li>
             @endif

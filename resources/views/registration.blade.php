@@ -9,7 +9,7 @@
 
 
 
-    <form action="{{ route('registrationSubmit') }}" method="post" class="registration_form">
+    <form action="{{ route('registrationSubmit') }}" method="post" class="registration_form" enctype="multipart/form-data">
         @csrf
         <label for="name">Username</label>
         <input type="text" name="name" id="name" placeholder="Username"> <br />
@@ -33,6 +33,12 @@
         <label for="password_confirmation">Confirm password</label>
         <input type="password" name="password_confirmation" id="password_confirmation"> <br />
         @error('password_confirmation')
+        <div class="error"> {{ $message }} </div>
+        @enderror
+
+        <label for="avatar">Confirm password</label>
+        <input type="file" name="avatar" id="avatar"> <br />
+        @error('avatar')
         <div class="error"> {{ $message }} </div>
         @enderror
 
