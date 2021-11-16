@@ -54,4 +54,12 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($password); //perform password hashing when passing password to the database
     }
+
+    public function scopeSearchUser($query)
+    {
+        if(request('user')){
+            $query->
+                where('name', 'like', request('user'));
+        }
+    }
 }

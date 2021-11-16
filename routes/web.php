@@ -131,9 +131,14 @@ Route::post(
 )->name('banUser');
 
 Route::post(
-    '/ban/{user:id}',
+    '/unban/{user:id}',
     [UserController::class, 'unBanUser']
 )->name('unBanUser');
+
+Route::get(
+    'users/search/{user:name}',
+    [UserController::class, 'searchUser']
+)->name('searchUser');
 
 
 

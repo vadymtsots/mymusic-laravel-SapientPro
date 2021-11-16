@@ -16,5 +16,6 @@
 </footer>
 
 <script src="{{ asset('/js/fetchArtist.js') }}"></script>
+<!-- <script src="{{ asset('/js/searchUsers.js') }}"></script> -->
 </body>
 </html>

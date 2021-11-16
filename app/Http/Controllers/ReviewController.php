@@ -76,7 +76,7 @@ class ReviewController extends Controller
         return view(
             'main',
             [
-                'reviews' => Review::latest()->where('user_id', $userId)->simplePaginate(6)
+                'reviews' => Review::latest()->where('user_id', $userId)->with("user", "artist", "album")->simplePaginate(6)
             ]
         );
     }

@@ -5,7 +5,7 @@
 
     <form action="{{ route('banUser', $user->id) }}" method="post">
         @csrf
-        @method('post')
+
         <button>OK</button>
     </form>
 
@@ -14,7 +14,7 @@
 
         <form action="{{ route('unBanUser', $user->id) }}" method="post">
             @csrf
-            @method('post')
+
             <button>OK</button>
         </form>
     @endif

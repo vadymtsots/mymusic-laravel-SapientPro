@@ -38,7 +38,7 @@ class UserController extends Controller
         return view(
             'users-list',
             [
-                'users' => $user->latest()->with('reviews')->simplePaginate(6),
+                'users' => $user->latest()->with('reviews')->where('is_admin', '=', 0)->searchUser(request('user'))->simplePaginate(6),
                 'numberOfReviews' => $user->reviews->count(),
 
             ]
@@ -50,7 +50,7 @@ class UserController extends Controller
         return view(
             'users-list',
             [
-                'users' => $user->where('is_banned', "=", 1)->simplePaginate(6),
+                'users' => $user->where('is_banned', "=", 1)->searchUser(request('user'))->simplePaginate(6),
                 'banned' => true
             ]
         );
@@ -80,7 +80,9 @@ class UserController extends Controller
     public function banUser(User $user)
     {
         if (Gate::allows('ban-user', $user)) {
-            User::where('id', $user->id)->update(['is_banned' => 1]);
+            User::where('id', $user->id)
+                ->where('is_admin', '<>' ,1)
+                ->update(['is_banned' => 1]);
             return redirect()->route('success');
         } else {
             return abort(403);
@@ -91,6 +93,12 @@ class UserController extends Controller
     {
         User::where('id', $user->id)->update(['is_banned' => 0]);
         return redirect()->route('success');
+    }
+
+    public function searchUser()
+    {
+        $user = User::searchUser()->firstOrFail();
+        return response()->json(['name' => $user->name]);
     }
 
 
