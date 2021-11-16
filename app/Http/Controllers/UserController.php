@@ -17,9 +17,9 @@ class UserController extends Controller
 
     public function storeData(UserRequest $request)
     {
-        if(request()->hasFile('avatar')){
+        if (request()->hasFile('avatar')) {
             $imageName = time() . '-' . $request->file('avatar')->getClientOriginalName();
-            $request->avatar->move(public_path('images'), $imageName);
+            $request->avatar->storeAs('avatars', $imageName, 'public');
 
             $user = new User;
             $user->fill($request->validated());
@@ -38,7 +38,9 @@ class UserController extends Controller
         return view(
             'users-list',
             [
-                'users' => $user->latest()->with('reviews')->where('is_admin', '=', 0)->searchUser(request('user'))->simplePaginate(6),
+                'users' => $user->latest()->with('reviews')->where('is_admin', '=', 0)
+                    ->searchUser(request('user')
+                )->simplePaginate(6),
                 'numberOfReviews' => $user->reviews->count(),
 
             ]
@@ -81,7 +83,7 @@ class UserController extends Controller
     {
         if (Gate::allows('ban-user', $user)) {
             User::where('id', $user->id)
-                ->where('is_admin', '<>' ,1)
+                ->where('is_admin', '<>', 1)
                 ->update(['is_banned' => 1]);
             return redirect()->route('success');
         } else {
