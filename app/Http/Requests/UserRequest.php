@@ -26,9 +26,12 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|unique:users,name',
             'email' => 'required|email:rfc,dns|unique:users,email',
-            'password' => 'required_with:password_confirmation|min:6',
+            'password' => [
+                'required_with:password_confirmation',
+                'regex:/^(?=.+[a-z])(?=.+[A-Z])(?=.+[0-9])[a-zA-Z0-9]{6,}$/'
+            ],
             'password_confirmation' => 'required|same:password',
-            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096'
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096'
         ];
     }
 }
