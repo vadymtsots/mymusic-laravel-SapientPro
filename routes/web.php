@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsBanned;
@@ -186,6 +187,12 @@ Route::get(
     'albums/{album}',
     [AlbumController::class, 'getAlbum']
 )->name('getAlbum');
+
+/**
+ * Mail related routes
+ */
+
+Route::get('send-mail', [MailController::class, 'sendMail']);
 
 
 
