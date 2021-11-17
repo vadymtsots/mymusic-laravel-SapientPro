@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
@@ -26,11 +27,11 @@ class UserController extends Controller
             $user->avatar = $imageName;
         }
 
-
         $user->save();
 
-
         Auth::login($user, $remember = true);
+
+        SendEmail::dispatch($user);
 
         return redirect()->route('main');
     }
