@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:users,name',
-            'email' => 'required|email:rfc,dns|unique:users,email',
+            'email' => 'required|email:rfc,dns',
             'password' => [
                 'required_with:password_confirmation',
                 'regex:/^(?=.+[a-z])(?=.+[A-Z])(?=.+[0-9])[a-zA-Z0-9]{6,}$/'

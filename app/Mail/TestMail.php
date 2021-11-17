@@ -12,7 +12,6 @@ class TestMail extends Mailable
     use Queueable, SerializesModels;
 
 
-
     /**
      * Create a new message instance.
      *
@@ -20,7 +19,6 @@ class TestMail extends Mailable
      */
     public function __construct()
     {
-
     }
 
     /**

@@ -21,19 +21,14 @@ class SendEmail implements ShouldQueue
     protected $user;
 
 
-
     /**
      * Create a new job instance.
      *
      * @param User $user
-     * @param TestMail $email
      */
     public function __construct(User $user)
     {
         $this->user = $user;
-
-
-
     }
 
     /**
