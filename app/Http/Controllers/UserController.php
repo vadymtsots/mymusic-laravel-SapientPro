@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewUser;
 use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
@@ -31,7 +32,9 @@ class UserController extends Controller
 
         Auth::login($user, $remember = true);
 
-        SendEmail::dispatch($user);
+//        SendEmail::dispatch($user);
+
+        event(new NewUser($user));
 
         return redirect()->route('main');
     }
