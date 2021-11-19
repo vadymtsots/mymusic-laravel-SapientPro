@@ -19,10 +19,6 @@
             @empty($banned)
                 <a href="{{ route('banConfirmation', $user) }}" class="button">Ban user</a>
             @endempty
-
-
-
-
         </div>
     @endforeach
         <p class="pagination_links">{{ $users->links() }}</p>

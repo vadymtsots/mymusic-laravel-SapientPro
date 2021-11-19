@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewUser;
+use App\Events\UserIsBanned;
 use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
@@ -87,15 +88,19 @@ class UserController extends Controller
 
     public function banUser(User $user)
     {
-        if (Gate::allows('ban-user', $user)) {
-            User::where('id', $user->id)
+            $user->where('id', $user->id)
                 ->where('is_admin', '<>', 1)
                 ->update(['is_banned' => 1]);
+
+            event(new UserIsBanned($user));
             return redirect()->route('success');
-        } else {
-            return abort(403);
+
+
+
         }
-    }
+
+
+
 
     public function unBanUser(User $user)
     {

@@ -3,12 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\NewUser;
-use App\Mail\TestMail;
+use App\Events\UserIsBanned;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Mail;
 
-class SendEmail
+class SendNotification
 {
     /**
      * Create the event listener.
@@ -23,12 +22,12 @@ class SendEmail
     /**
      * Handle the event.
      *
-     * @param  NewUser  $event
+     * @param NewUser $event
      * @return void
      */
-    public function handle(NewUser $event)
+    public function handle(UserIsBanned $event)
     {
         $user = $event->user;
-       \App\Jobs\SendEmail::dispatch($user);
+        \App\Jobs\SendNotificationJob::dispatch($user);
     }
 }

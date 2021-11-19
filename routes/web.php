@@ -120,7 +120,6 @@ Route::get(
     [UserController::class, 'getBannedUsers']
 )->name('bannedUsers');
 
-
 Route::get(
     '/user/ban/{user}',
     [UserController::class, 'banConfirmation']
