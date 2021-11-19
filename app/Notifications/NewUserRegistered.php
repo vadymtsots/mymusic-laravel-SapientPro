@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,14 +12,16 @@ class NewUserRegistered extends Notification
 {
     use Queueable;
 
+    public $user;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param User $user
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -35,14 +38,16 @@ class NewUserRegistered extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     * @param User $user
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
+        $url = route('getUser', ['user' => $this->user->name]);
         return (new MailMessage)
                     ->line('New user has been registered!')
-                    ->action('View User', url('/'))
+                    ->action('View user', $url)
                     ->line('Thank you for using our application!');
     }
 

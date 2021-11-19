@@ -7,7 +7,7 @@ use App\Events\UserIsBanned;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendNotification
+class SendNotificationWhenUserIsBanned
 {
     /**
      * Create the event listener.

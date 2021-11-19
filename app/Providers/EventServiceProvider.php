@@ -5,7 +5,8 @@ namespace App\Providers;
 use App\Events\NewUser;
 use App\Events\UserIsBanned;
 use App\Listeners\SendEmail;
-use App\Listeners\SendNotification;
+use App\Listeners\SendNotificationWhenNewUserRegistered;
+use App\Listeners\SendNotificationWhenUserIsBanned;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -25,10 +26,11 @@ class EventServiceProvider extends ServiceProvider
 
         NewUser::class => [
             SendEmail::class,
+            SendNotificationWhenNewUserRegistered::class
         ],
 
         UserIsBanned::class => [
-            SendNotification::class
+            SendNotificationWhenUserIsBanned::class
         ]
     ];
 
