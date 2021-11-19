@@ -7,6 +7,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\Telegram\TelegramChannel;
+use NotificationChannels\Telegram\TelegramMessage;
 
 class NewUserRegistered extends Notification
 {
@@ -32,7 +34,7 @@ class NewUserRegistered extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return [TelegramChannel::class];
     }
 
     /**
@@ -44,7 +46,7 @@ class NewUserRegistered extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = route('getUser', ['user' => $this->user->name]);
+       $url = route('getUser', ['user' => $this->user->name]);
         return (new MailMessage)
                     ->line('New user has been registered!')
                     ->action('View user', $url)
@@ -62,5 +64,12 @@ class NewUserRegistered extends Notification
         return [
             //
         ];
+    }
+
+    public function toTelegram()
+    {
+        return TelegramMessage::create()
+            ->to('@tsots_notifications')
+            ->content('New user has been added! Username: ' . $this->user->name);
     }
 }
