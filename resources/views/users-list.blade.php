@@ -21,7 +21,14 @@
             @endempty
         </div>
     @endforeach
-        <p class="pagination_links">{{ $users->links() }}</p>
+
+    @isset($banned)
+        <a href="{{ route('users') }}" class="add">All users</a>
+    @endisset
+    @empty($banned)
         <a href="{{ route('bannedUsers') }}">Banned users</a>
+    @endempty
+        <p class="pagination_links">{{ $users->links() }}</p>
+
 
 </x-layout>

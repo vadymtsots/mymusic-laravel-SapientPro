@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Spotify;
 use App\Models\Album;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -22,6 +23,18 @@ class AlbumController extends Controller
                 'album' => $album,
                 'avgRating' => number_format($avgRating, 1),
                 'reviews' => $album->reviews
+            ]
+        );
+    }
+
+    public function getSpotifyAlbum(string $id)
+    {
+        $album = Spotify::album($id)->get();
+
+        return view(
+            'spotify-album',
+            [
+                'album' => $album
             ]
         );
     }

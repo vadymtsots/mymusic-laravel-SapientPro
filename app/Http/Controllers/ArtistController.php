@@ -13,13 +13,23 @@ class ArtistController extends Controller
     public function getArtists(Artist $artist)
     {
         $query = request()->input('artist');
+        $artist = Spotify::searchArtists($query)->limit(1)->get();
+        $artistID = $artist['artists']['items']['0']['id'];
+        $artistAlbums = Spotify::artistAlbums($artistID)
+            ->limit(30)
+            ->includeGroups('album')
+            ->country('GB')
+            ->get();
+
+        $artistAlbumsItems = $artistAlbums['items'];
+
 //            Artist::search(request(['artist']))->get();
         return view(
             'artists',
             [
 //              'artists' => $artist->artistSearch(request(['artist']))->simplePaginate(5)
-                'artist' => Spotify::searchArtists($query)->get()
-
+                'artist' => $artist,
+                'artistAlbums' => $artistAlbumsItems,
             ]
         );
     }

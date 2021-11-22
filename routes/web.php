@@ -187,6 +187,11 @@ Route::get(
     [AlbumController::class, 'getAlbum']
 )->name('getAlbum');
 
+Route::get(
+    'spotify-albums/{id}',
+    [AlbumController::class, 'getSpotifyAlbum']
+)->name('getSpotifyAlbum');
+
 /**
  * Mail related routes
  */
