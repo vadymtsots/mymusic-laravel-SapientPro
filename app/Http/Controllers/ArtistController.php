@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Spotify;
 use Illuminate\Http\Request;
 use App\Models\Artist;
 use PhpMyAdmin\Response;
+
 
 class ArtistController extends Controller
 {
     public function getArtists(Artist $artist)
     {
+        $query = request()->input('artist');
 //            Artist::search(request(['artist']))->get();
         return view(
             'artists',
             [
-                'artists' => $artist->artistSearch(request(['artist']))->simplePaginate(5)
+//              'artists' => $artist->artistSearch(request(['artist']))->simplePaginate(5)
+                'artist' => Spotify::searchArtists($query)->get()
+
             ]
         );
     }
