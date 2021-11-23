@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NewUser;
 use App\Events\UserIsBanned;
+use App\Http\Requests\UserProfileRequest;
 use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
@@ -46,8 +47,9 @@ class UserController extends Controller
             'users-list',
             [
                 'users' => $user->latest()->with('reviews')->where('is_admin', '=', 0)
-                    ->searchUser(request('user')
-                )->simplePaginate(6),
+                    ->searchUser(
+                        request('user')
+                    )->simplePaginate(6),
                 'numberOfReviews' => $user->reviews->count(),
 
             ]
@@ -88,19 +90,13 @@ class UserController extends Controller
 
     public function banUser(User $user)
     {
-            $user->where('id', $user->id)
-                ->where('is_admin', '<>', 1)
-                ->update(['is_banned' => 1]);
+        $user->where('id', $user->id)
+            ->where('is_admin', '<>', 1)
+            ->update(['is_banned' => 1]);
 
-            event(new UserIsBanned($user));
-            return redirect()->route('success');
-
-
-
-        }
-
-
-
+        event(new UserIsBanned($user));
+        return redirect()->route('success');
+    }
 
     public function unBanUser(User $user)
     {
@@ -112,6 +108,30 @@ class UserController extends Controller
     {
         $user = User::searchUser()->firstOrFail();
         return response()->json(['name' => $user->name]);
+    }
+
+    public function showEditForm(User $user)
+    {
+        return view(
+            'edit-user',
+            [
+                'user' => $user
+            ]
+        );
+    }
+
+    public function updateUser(UserProfileRequest $request, $id)
+    {
+        $user = User::find($id);
+        $user->fill($request->validated());
+        if (request()->hasFile('avatar')) {
+            $imageName = time() . '-' . $request->file('avatar')->getClientOriginalName();
+            $request->avatar->storeAs('avatars', $imageName, 'public');
+            $user->avatar = $imageName;
+        }
+        $user->save();
+
+        return redirect()->route('getUser', $user->name);
     }
 
 

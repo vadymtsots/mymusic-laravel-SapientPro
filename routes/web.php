@@ -140,6 +140,16 @@ Route::get(
     [UserController::class, 'searchUser']
 )->name('searchUser');
 
+Route::get(
+    'user/edit/{user}',
+    [UserController::class, 'showEditForm']
+)->name('editUser');
+
+Route::post(
+    'edit-user/{id}',
+    [UserController::class, 'updateUser']
+)->name('updateUser');
+
 
 
 /**

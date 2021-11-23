@@ -5,6 +5,9 @@
         <p class="text">Reviews written: {{ $numberOfReviews }}</p>
         <p>Avatar: <img alt="avatar" class="text" src="{{ asset('storage/avatars/' . $user->avatar) }}"></p>
         <a href="{{ route('userReviews', $user) }}">See {{ $user->name }} reviews</a>
+        @if(Auth::user()->id === $user->id)
+            <a href="{{ route('editUser', $user) }}">Edit profile</a>
+        @endif
     </div>
 
 </x-layout>
