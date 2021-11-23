@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NewUser;
 use App\Events\UserIsBanned;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserProfileRequest;
 use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -132,6 +134,26 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('getUser', $user->name);
+    }
+
+    public function changePasswordForm(User $user)
+    {
+        return view(
+            'change-password-form',
+            [
+                'user' => $user
+            ]);
+    }
+
+    public function updatePassword(ChangePasswordRequest $request)
+    {
+        $user = Auth::user();
+
+        if(Hash::check($request->current_password, Auth::user()->password)){
+            $user->fill($request->validated());
+            $user->save();
+            return redirect()->route('success');
+        }
     }
 
 

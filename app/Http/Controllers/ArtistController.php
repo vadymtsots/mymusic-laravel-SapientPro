@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Spotify;
 use Illuminate\Http\Request;
 use App\Models\Artist;
@@ -12,6 +13,7 @@ class ArtistController extends Controller
 {
     public function getArtists(Artist $artist)
     {
+
         $query = request()->input('artist');
         $artist = Spotify::searchArtists($query)->limit(1)->get();
         $artistID = $artist['artists']['items']['0']['id'];
@@ -29,7 +31,7 @@ class ArtistController extends Controller
             [
 //              'artists' => $artist->artistSearch(request(['artist']))->simplePaginate(5)
                 'artist' => $artist,
-                'artistAlbums' => $artistAlbumsItems,
+               'artistAlbums' => $artistAlbumsItems,
             ]
         );
     }

@@ -150,6 +150,15 @@ Route::post(
     [UserController::class, 'updateUser']
 )->name('updateUser');
 
+Route::get(
+    'password/change/{user}',
+    [UserController::class, 'changePasswordForm']
+)->name('changePasswordForm');
+
+Route::post(
+    'password/change/submit',
+    [UserController::class, 'updatePassword']
+)->name('updatePassword');
 
 
 /**
