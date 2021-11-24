@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements \Illuminate\Contracts\Auth\CanResetPassword
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -51,8 +52,8 @@ class User extends Authenticatable
     }
 
     public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password); //perform password hashing when passing password to the database
+   {
+       $this->attributes['password'] = bcrypt($password); //perform password hashing when passing password to the database
     }
 
     public function scopeSearchUser($query)

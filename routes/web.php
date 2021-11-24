@@ -4,6 +4,7 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsBanned;
@@ -159,6 +160,26 @@ Route::post(
     'password/change/submit',
     [UserController::class, 'updatePassword']
 )->name('updatePassword');
+
+Route::get(
+    '/forgot-password',
+    [ResetPasswordController::class, 'forgotPasswordForm']
+)->middleware('guest')->name('password.request');
+
+Route::post(
+    '/forgot-password/submit',
+    [ResetPasswordController::class, 'sendResetLink']
+)->middleware('guest')->name('password.email');
+
+Route::get(
+    '/reset-password/{token}',
+    [ResetPasswordController::class, 'resetPasswordForm']
+)->middleware('guest')->name('password.reset');
+
+Route::post(
+    '/reset-password/submit',
+    [ResetPasswordController::class, 'resetPassword']
+)->middleware('guest')->name('password.update');
 
 
 /**
