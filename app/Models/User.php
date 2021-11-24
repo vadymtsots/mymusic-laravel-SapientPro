@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\ResetPassword as ResetPasswordNotification;
 
 class User extends Authenticatable implements \Illuminate\Contracts\Auth\CanResetPassword
 {
@@ -62,5 +64,10 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\CanRese
             $query->
                 where('name', 'like', request('user'));
         }
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }
