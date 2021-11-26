@@ -14,7 +14,7 @@ class ArtistController extends Controller
     public function getArtists(Artist $artist)
     {
 
-        $query = request()->input('artist');
+       /* $query = request()->input('artist');
         $artist = Spotify::searchArtists($query)->limit(1)->get();
         $artistID = $artist['artists']['items']['0']['id'];
         $artistAlbums = Spotify::artistAlbums($artistID)
@@ -23,15 +23,19 @@ class ArtistController extends Controller
             ->country('GB')
             ->get();
 
-        $artistAlbumsItems = $artistAlbums['items'];
+        $artistAlbumsItems = $artistAlbums['items']; */
 
-//            Artist::search(request(['artist']))->get();
+
+          $artist = Artist::search()->firstOrFail();
+          $albums = $artist->albums;
         return view(
             'artists',
             [
 //              'artists' => $artist->artistSearch(request(['artist']))->simplePaginate(5)
                 'artist' => $artist,
-               'artistAlbums' => $artistAlbumsItems,
+                'albums' => $albums
+//               'artistAlbums' => $artistAlbumsItems,
+
             ]
         );
     }
@@ -43,7 +47,7 @@ class ArtistController extends Controller
 
     public function getArtist(Request $request)
     {
-        $artist = Artist::searchArtist()->firstOrFail();
+        $artist = Artist::search()->firstOrFail();
         $albums = $artist->albums;
         return response()->json(['id' => $artist->id, 'name' => $artist->name, 'albums' => $albums]);
     }

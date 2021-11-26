@@ -5,7 +5,7 @@
         <p class="text">Reviews written: {{ $numberOfReviews }}</p>
         <p>Avatar: <img alt="avatar" class="text" src="{{ asset('storage/avatars/' . $user->avatar) }}"></p>
         <a href="{{ route('userReviews', $user) }}">See {{ $user->name }} reviews</a>
-        @if(Auth::user()->id === $user->id)
+        @if(Auth::check() && Auth::user()->id === $user->id)
             <a href="{{ route('editUser', $user) }}" class="button">Edit profile</a>
             <a href="{{ route('changePasswordForm', $user) }}" class="button">Change password</a>
         @endif

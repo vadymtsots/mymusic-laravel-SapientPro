@@ -23,6 +23,11 @@
         <div class="error"> {{ $message }} </div>
         @enderror
 
+        <label for="avatar">Avatar</label>
+        <input type="file" name="avatar" id="avatar"> <br />
+        @error('avatar')
+        <div class="error"> {{ $message }} </div>
+        @enderror
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password" placeholder="Password"> <br />
@@ -36,11 +41,7 @@
         <div class="error"> {{ $message }} </div>
         @enderror
 
-        <label for="avatar">Confirm password</label>
-        <input type="file" name="avatar" id="avatar"> <br />
-        @error('avatar')
-        <div class="error"> {{ $message }} </div>
-        @enderror
+
 
         <input type="submit" name="submit" id="submit" class="button">
     </form>

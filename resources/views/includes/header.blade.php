@@ -29,10 +29,10 @@
     </ul>
     @endif
 
-        <form action="{{ route('getArtists') }}" class="registration_form">
+       <form action="{{ route('getArtists') }}" class="registration_form">
             @csrf
             <label for="artist">Find artist</label>
-            <input type="text" id="artist" name="artist">
+            <input type="text" id="artist1" name="artist1">
         </form>
 
 

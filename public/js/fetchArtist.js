@@ -7,6 +7,8 @@ function getArtist(e)
     const url = `/new/${field}`;
     const artistId = document.getElementById('artist_id');
 
+
+
     e.preventDefault();
     fetch(url,
         {
@@ -22,7 +24,6 @@ function getArtist(e)
         .then(artist => {
 
             const {albums} = artist;
-
             albums.map((item) => {
                 let option = document.createElement('option');
                 let optionText = document.createTextNode(item.name)
@@ -33,7 +34,10 @@ function getArtist(e)
             })
             artistId.setAttribute('value', artist.id);
         })
-    }
-    btnArtist.addEventListener("click", (e)=> {
-        getArtist(e);
+}
+
+
+
+btnArtist.addEventListener("click", (e)=> {
+    getArtist(e);
 });

@@ -24,10 +24,11 @@ class ArtistField extends Component
      */
     public function render()
     {
-        $artist = Artist::searchArtist()->firstOrFail();
+    $artist = Artist::search()->firstOrFail();
         return view('components.artist-field',
         [
-            'artist' => $artist
+            'artist' => $artist->name
         ]);
+
     }
 }

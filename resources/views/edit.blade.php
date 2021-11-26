@@ -6,7 +6,7 @@
         <input type="hidden" id="user_id" name="user_id" value="{{ $review->user->id }}">
 
         <label for="artist">Artist</label>
-        <input type="text" id="artist" name="artist" value="{{ $review->artist->name }}" disabled>
+        <input type="text" id="edit_artist" name="artist" value="{{ $review->artist->name }}" disabled>
         @error('artist')
         <div class="error"> {{ $message }} </div>
         @enderror
