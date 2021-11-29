@@ -10,6 +10,7 @@ class Album extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $fillable = ['artist_id', 'name', 'release_year'];
 
 
     public function artist()
@@ -20,5 +21,10 @@ class Album extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class);
     }
 }

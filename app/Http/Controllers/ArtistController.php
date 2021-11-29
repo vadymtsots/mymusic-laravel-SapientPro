@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redis;
 use Spotify;
 use Illuminate\Http\Request;
 use App\Models\Artist;
@@ -14,7 +15,7 @@ class ArtistController extends Controller
     public function getArtists(Artist $artist)
     {
 
-       /* $query = request()->input('artist');
+        $query = request()->input('artist');
         $artist = Spotify::searchArtists($query)->limit(1)->get();
         $artistID = $artist['artists']['items']['0']['id'];
         $artistAlbums = Spotify::artistAlbums($artistID)
@@ -23,18 +24,16 @@ class ArtistController extends Controller
             ->country('GB')
             ->get();
 
-        $artistAlbumsItems = $artistAlbums['items']; */
+        $artistAlbumsItems = $artistAlbums['items'];
 
 
-          $artist = Artist::search()->firstOrFail();
-          $albums = $artist->albums;
+
         return view(
             'artists',
             [
-//              'artists' => $artist->artistSearch(request(['artist']))->simplePaginate(5)
-                'artist' => $artist,
-                'albums' => $albums
-//               'artistAlbums' => $artistAlbumsItems,
+             'artists' => $artist->artistSearch(request(['artist']))->simplePaginate(5),
+
+              'artistAlbums' => $artistAlbumsItems,
 
             ]
         );

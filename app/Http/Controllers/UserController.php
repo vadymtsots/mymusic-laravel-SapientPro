@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NewUser;
 use App\Events\UserIsBanned;
+use App\Events\UserIsUnblocked;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserProfileRequest;
 use App\Jobs\SendEmail;
@@ -103,6 +104,7 @@ class UserController extends Controller
     public function unBanUser(User $user)
     {
         User::where('id', $user->id)->update(['is_banned' => 0]);
+        event(new UserIsUnblocked($user));
         return redirect()->route('success');
     }
 

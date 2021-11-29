@@ -1,11 +1,11 @@
 
 <x-layout>
 
-    <form action="">
+    <form action="" class="registration_form">
         <label for="user">Search</label>
         <input type="text" name="user" id="user">
         <button type="submit" id="searchUser"> Search</button>
-    </form>
+    </form> <br />
     @foreach($users as $user)
         <div class="review">
             <p class="text">Name: {{ $user->name }}</p>
