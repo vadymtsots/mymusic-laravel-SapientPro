@@ -17,6 +17,7 @@
             <li><a href="{{ route('getUser', ['user' => Auth::user()]) }}" class="add">My profile</a></li>
             @if(Auth::user()->is_admin)
                 <li><a href="{{ route('users') }}" class="add">Users</a></li>
+                <li><a href="{{ route('addAlbumForm') }}" class="add">Add new album</a></li>
             @endif
         </ul>
     </div>

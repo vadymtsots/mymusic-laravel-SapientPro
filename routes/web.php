@@ -232,6 +232,16 @@ Route::get(
     [AlbumController::class, 'getSpotifyAlbum']
 )->name('getSpotifyAlbum');
 
+Route::get(
+    'album/new',
+    [AlbumController::class, 'addAlbumForm']
+)->name('addAlbumForm');
+
+Route::post(
+    'album/new/submit',
+    [AlbumController::class, 'storeAlbumData']
+)->name('storeAlbumData');
+
 /**
  * Mail related routes
  */

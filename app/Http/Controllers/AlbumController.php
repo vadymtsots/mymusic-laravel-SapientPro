@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
+use App\Models\Genre;
 use Spotify;
 use App\Models\Album;
 use App\Models\Review;
@@ -22,7 +24,8 @@ class AlbumController extends Controller
             [
                 'album' => $album,
                 'avgRating' => number_format($avgRating, 1),
-                'reviews' => $album->reviews
+                'reviews' => $album->reviews,
+                'genres' => $album->genres
             ]
         );
     }
@@ -37,5 +40,30 @@ class AlbumController extends Controller
                 'album' => $album
             ]
         );
+    }
+
+    public function addAlbumForm()
+    {
+        return view(
+            'new-album',
+                [
+                    'artists' => Artist::all(),
+                    'genres' => Genre::all()
+                ]
+        );
+    }
+
+    public function storeAlbumData(Request $request)
+    {
+        $album = new Album;
+        $album->artist_id = $request->input('artist');
+        $album->name = $request->input('name');
+        $album->release_year = $request->input('release_year');
+        $genreIds = $request->input('genres');
+        $genres = Genre::find($genreIds);
+        $album->save();
+        $album->genres()->attach($genres);
+
+        return redirect()->route('getAlbum', $album);
     }
 }

@@ -4,7 +4,7 @@
 
     <form action="{{ route('reviewSubmit') }}" method="post" class="registration_form">
 
-      <x-artist-field />
+        <x-artist-field />
 
 
         <x-album-dropdown />

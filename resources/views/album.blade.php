@@ -2,6 +2,16 @@
     <div class="review">
         <p><h1>{{ $album->name }}</h1></p> <br />
         <p> Released: {{ $album->release_year }} </p>
+
+        <p>Genres:
+            @foreach($genres as $genre)
+                @if($loop->last)
+                    {{ $genre->name }}
+                @else
+                {{ $genre->name . ", "  }}
+                @endif
+            @endforeach
+        </p>
         <p> Average rating: {{ $avgRating }}</p>
 
         <h2>Reviews: </h2>
