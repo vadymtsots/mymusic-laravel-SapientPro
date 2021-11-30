@@ -3,7 +3,7 @@
     @if($user->is_banned == 0)
     <h1>Are you sure you want to ban this user?</h1>
 
-    <form action="{{ route('banUser', $user->id) }}" method="post">
+    <form action="{{ route('userAccess', $user->id) }}" method="post">
         @csrf
 
         <button>OK</button>
@@ -12,7 +12,7 @@
     @else
         <h1>Are you sure you want to unban this user?</h1>
 
-        <form action="{{ route('unBanUser', $user->id) }}" method="post">
+        <form action="{{ route('userAccess', $user->id) }}" method="post">
             @csrf
 
             <button>OK</button>

@@ -91,6 +91,22 @@ class UserController extends Controller
         );
     }
 
+    public function userAccess(User $user)
+    {
+        if($user->is_banned == 0){
+            $user->where('id', $user->id)
+                ->where('is_admin', '<>', 1)
+                ->update(['is_banned' => 1]);
+
+            event(new UserIsBanned($user));
+        }
+        if($user->is_banned == 1){
+            User::where('id', $user->id)->update(['is_banned' => 0]);
+            event(new UserIsUnblocked($user));
+        }
+        return redirect()->route('success');
+    }
+
     public function banUser(User $user)
     {
         $user->where('id', $user->id)

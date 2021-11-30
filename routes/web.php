@@ -127,6 +127,11 @@ Route::get(
 )->name('banConfirmation');
 
 Route::post(
+    '/access/{user:id}',
+    [UserController::class, 'userAccess']
+)->name('userAccess');
+
+Route::post(
     '/ban/{user:id}',
     [UserController::class, 'banUser']
 )->name('banUser');
