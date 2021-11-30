@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AlbumRequest;
 use App\Models\Artist;
 use App\Models\Genre;
 use Spotify;
@@ -53,15 +54,15 @@ class AlbumController extends Controller
         );
     }
 
-    public function storeAlbumData(Request $request)
+    public function storeAlbumData(AlbumRequest $request)
     {
         $album = new Album;
-        $album->artist_id = $request->input('artist');
-        $album->name = $request->input('name');
-        $album->release_year = $request->input('release_year');
+        $album->fill($request->validated());
+        $album->save();
+
+        //attaching genre relations to the pivot table
         $genreIds = $request->input('genres');
         $genres = Genre::find($genreIds);
-        $album->save();
         $album->genres()->attach($genres);
 
         return redirect()->route('getAlbum', $album);

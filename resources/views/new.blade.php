@@ -6,7 +6,6 @@
 
         <x-artist-field />
 
-
         <x-album-dropdown />
 
         <x-review-form />

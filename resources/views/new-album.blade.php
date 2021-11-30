@@ -3,7 +3,7 @@
         @csrf
 
         <label for="artist">Artist</label>
-        <select name="artist" id="artist">
+        <select name="artist_id" id="artist_id">
             @foreach($artists as $artist)
                 <option value="{{ $artist->id }}">{{ $artist->name }}</option>
             @endforeach
@@ -28,11 +28,15 @@
         @foreach($genres as $genre)
             <label for="genres[]">{{ $genre->name }}</label>
             <input type="checkbox" name="genres[]" id="genres[]" placeholder="Genre" value="{{ $genre->id }}"> <br />
+                @error('genres')
+                <div class="error"> {{ $message }} </div>
+                @enderror
         @endforeach
         </div>
 
 
         <input type="submit" class="button" value="Add">
+
 
     </form>
 </x-layout>
